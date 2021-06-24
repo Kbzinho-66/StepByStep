@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_telaInicial">
+
+    <fragment
+        android:id="@+id/nav_telaInicial"
+        android:name="com.example.stepbystep.ui.home.HomeFragmento"
+        android:label="@string/menu_home"
+        tools:layout="@layout/home_fragment">
+        <action
+            android:id="@+id/action_nav_home_to_nav_gallery"
+            app:destination="@id/nav_livroReceitas" />
+        <action
+            android:id="@+id/action_nav_home_to_nav_recipeCreator"
+            app:destination="@id/nav_novaReceita" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_livroReceitas"
+        android:name="com.example.stepbystep.ui.galeria.GaleriaFragmento"
+        android:label="@string/menu_gallery"
+        tools:layout="@layout/galeria_fragment" >
+        <action
+            android:id="@+id/action_nav_livroReceitas_to_nav_recipeCreator"
+            app:destination="@id/nav_novaReceita" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_novaReceita"
+        android:name="com.example.stepbystep.ui.receitas.criador.CriadorReceita"
+        android:label="Criação de Receita"
+        tools:layout="@layout/criador_fragment">
+    </fragment>
+
+</navigation>

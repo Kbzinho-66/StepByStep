@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/desert_sand"
+    tools:context=".ui.home.HomeFragmento">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayoutMain"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/Theme.Cookbook.AppBarOverlay"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/Theme.Cookbook.PopupOverlay" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <ImageButton
+        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+        android:id="@+id/botaoAdicionarReceita"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginTop="50dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.15"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayoutMain"
+        android:foreground="@drawable/ic_add_recipe"
+        android:foregroundTint="@color/black_coral"
+        android:foregroundGravity="center"
+        tools:ignore="ContentDescription" />
+
+    <TextView
+        android:id="@+id/textoAdicionarReceita"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="@string/menu_newRecipe"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        android:textColor="@color/gunmetal"
+        app:layout_constraintEnd_toEndOf="@+id/botaoAdicionarReceita"
+        app:layout_constraintStart_toStartOf="@+id/botaoAdicionarReceita"
+        app:layout_constraintTop_toBottomOf="@+id/botaoAdicionarReceita" />
+
+    <ImageButton
+        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+        android:id="@+id/botaoLivroReceitas"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginTop="50dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.85"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayoutMain"
+        android:foreground="@drawable/ic_cookbook"
+        android:foregroundTint="@color/black_coral"
+        android:foregroundGravity="center"
+        tools:ignore="ContentDescription" />
+
+    <TextView
+        android:id="@+id/textoLivroReceitas"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="@string/menu_gallery"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        android:textColor="@color/gunmetal"
+        app:layout_constraintEnd_toEndOf="@+id/botaoLivroReceitas"
+        app:layout_constraintStart_toStartOf="@+id/botaoLivroReceitas"
+        app:layout_constraintTop_toBottomOf="@+id/botaoLivroReceitas"/>
+
+    <ImageButton
+        android:id="@+id/botaoProcurarIngrediente"
+        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginTop="100dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/botaoAdicionarReceita"
+        app:layout_constraintTop_toBottomOf="@+id/botaoAdicionarReceita"
+        android:foreground="@drawable/ic_ingredients"
+        android:foregroundTint="@color/black_coral"
+        android:foregroundGravity="center"
+        tools:ignore="ContentDescription" />
+
+    <TextView
+        android:id="@+id/textoProcurarIngrediente"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="Procurar receita por \n ingrediente"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        android:textColor="@color/gunmetal"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="@+id/botaoProcurarIngrediente"
+        app:layout_constraintStart_toStartOf="@+id/botaoProcurarIngrediente"
+        app:layout_constraintTop_toBottomOf="@+id/botaoProcurarIngrediente"
+        tools:ignore="HardcodedText" />
+
+    <ImageButton
+        android:id="@+id/botaoProcurarTempo"
+        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginTop="100dp"
+        app:layout_constraintEnd_toEndOf="@+id/botaoLivroReceitas"
+        app:layout_constraintTop_toBottomOf="@+id/botaoLivroReceitas"
+        android:foreground="@drawable/ic_timer"
+        android:foregroundTint="@color/black_coral"
+        android:foregroundGravity="center"
+        tools:ignore="ContentDescription" />
+
+    <TextView
+        android:id="@+id/textoProcurarTempo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="Procurar receita por \n tempo de preparo"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        android:textColor="@color/gunmetal"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="@+id/botaoProcurarTempo"
+        app:layout_constraintStart_toStartOf="@+id/botaoProcurarTempo"
+        app:layout_constraintTop_toBottomOf="@+id/botaoProcurarTempo"
+        tools:ignore="HardcodedText" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

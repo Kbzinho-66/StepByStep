@@ -1,0 +1,25 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.StepByStep" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/medium_carmine</item>
+        <item name="colorPrimaryVariant">@color/new_york_pink</item>
+        <item name="colorOnPrimary">@color/desert_sand</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/medium_carmine</item>
+        <item name="colorSecondaryVariant">@color/new_york_pink</item>
+        <item name="colorOnSecondary">@color/slate_grey</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <!-- Customize your theme here. -->
+    </style>
+
+    <style name="Theme.StepByStep.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.Cookbook.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.Cookbook.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+</resources>

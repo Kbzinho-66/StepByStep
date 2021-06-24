@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">Step by Step</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Tela Inicial</string>
+    <string name="menu_gallery">Livro de Receitas</string>
+    <string name="menu_newRecipe">Adicionar uma nova receita</string>
+    <string name="name_hint">Nome do Prato</string>
+    <string name="hint_prep_time">Tempo de Preparo</string>
+    <string name="hint_cook_time">Tempo de Cozimento</string>
+    <string name="hint_servings">Número de Porções</string>
+    <string name="ingredients">Ingredientes</string>
+    <string name="steps">Lista de Passos</string>
+    <string name="save">Salvar</string>
+    <string name="delete">Deletar</string>
+</resources>

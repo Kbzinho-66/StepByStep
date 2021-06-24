@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_telaInicial"
+            android:icon="@drawable/ic_home"
+            android:title="@string/menu_home" />
+        <item
+            android:id="@+id/nav_livroReceitas"
+            android:icon="@drawable/ic_cookbook"
+            android:title="@string/menu_gallery" />
+        <item
+            android:id="@+id/nav_novaReceita"
+            android:icon="@drawable/ic_add_recipe"
+            android:title="@string/menu_newRecipe" />
+    </group>
+</menu>
