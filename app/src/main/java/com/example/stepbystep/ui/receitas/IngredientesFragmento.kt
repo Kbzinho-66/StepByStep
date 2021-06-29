@@ -20,7 +20,7 @@ class IngredientesFragmento: Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        _binding = ReceitasFragmentRvIngredientesBinding.inflate(inflater, container, true)
+        _binding = ReceitasFragmentRvIngredientesBinding.inflate(inflater, container, false)
 
         val rv: RecyclerView
 

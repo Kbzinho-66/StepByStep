@@ -21,22 +21,22 @@
             app:navigationIconTint="@color/smoky_black"
             app:title="Home"
             app:titleTextColor="@color/smoky_black"
-            app:menu="@menu/top_app_bar" />
+            app:menu="@menu/main" />
 
 
     </com.google.android.material.appbar.AppBarLayout>
 
     <include layout="@layout/main_content" />
 
-    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-        android:id="@+id/fab_adicionar_receita"
-        android:layout_width="64dp"
-        android:layout_height="64dp"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        app:icon="@drawable/ic_add_recipe"
-        app:iconSize="40dp"
-        app:iconTint="@color/smoky_black"
-        tools:ignore="ContentDescription" />
+<!--    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton-->
+<!--        android:id="@+id/fab_adicionar_receita"-->
+<!--        android:layout_width="64dp"-->
+<!--        android:layout_height="64dp"-->
+<!--        android:layout_gravity="bottom|end"-->
+<!--        android:layout_margin="@dimen/fab_margin"-->
+<!--        app:icon="@drawable/ic_add_recipe"-->
+<!--        app:iconSize="40dp"-->
+<!--        app:iconTint="@color/smoky_black"-->
+<!--        tools:ignore="ContentDescription" />-->
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

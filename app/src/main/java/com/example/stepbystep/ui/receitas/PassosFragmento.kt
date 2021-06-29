@@ -17,10 +17,10 @@ class PassosFragmento : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
 
-        _binding = ReceitasFragmentRvPassosBinding.inflate(inflater, container, true)
+        _binding = ReceitasFragmentRvPassosBinding.inflate(inflater, container, false)
 
         return binding.root
     }

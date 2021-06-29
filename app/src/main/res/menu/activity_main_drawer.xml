@@ -13,7 +13,7 @@
             android:icon="@drawable/ic_cookbook"
             android:title="@string/menu_gallery" />
         <item
-            android:id="@+id/nav_novaReceita"
+            android:id="@+id/nav_criador"
             android:icon="@drawable/ic_add_recipe"
             android:title="@string/menu_newRecipe" />
     </group>

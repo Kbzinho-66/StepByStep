@@ -22,7 +22,7 @@ class HomeFragmento : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         _binding = HomeFragmentBinding.inflate(inflater, container, false)
 
@@ -35,6 +35,7 @@ class HomeFragmento : Fragment() {
             }
             botaoProcurarIngrediente.setOnClickListener {
                 Snackbar.make(binding.root, "Ainda não implementado", Snackbar.LENGTH_LONG).show()
+                findNavController().navigate(R.id.action_nav_home_to_visualizadorReceita)
                 //TODO (Implementar tudo isso)
             }
             botaoProcurarTempo.setOnClickListener {
