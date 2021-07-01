@@ -1,15 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/desert_sand">
-
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:context=".ui.receitas.criador.CriadorReceita">
+    android:background="@color/desert_sand"
+    tools:context=".ui.receitas.criador.CriadorReceita">
 
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/appBarLayoutRC"
@@ -31,8 +28,8 @@
 
         <ImageView
             android:id="@+id/foto_RC"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
             android:layout_marginTop="100dp"
             android:foreground="@drawable/ic_camera"
             android:foregroundTint="@color/black_coral"
@@ -114,85 +111,84 @@
             app:layout_constraintStart_toStartOf="@+id/botao_passos_RC"
             app:layout_constraintTop_toBottomOf="@+id/botao_passos_RC" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputLayout_tempoPreparo_RC"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="400dp"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout_tempoPreparo_RC"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="400dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/hint_prep_time"
+        app:boxStrokeColor="@color/black_coral"
+        app:boxStrokeWidth="2dp"
+
+        app:boxStrokeWidthFocused="3dp"
+        app:expandedHintEnabled="true"
+
+        app:hintTextColor="@color/black_coral"
+        app:layout_constraintBottom_toTopOf="@+id/textInputLayout_tempoCozimento_RC"
+        app:layout_constraintEnd_toEndOf="parent"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:startIconDrawable="@drawable/ic_prep"
+        app:startIconTint="@color/black_coral">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/entrada_tempo_preparo"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="150dp"
-            android:hint="@string/hint_prep_time"
-            app:boxStrokeColor="@color/black_coral"
-            app:boxStrokeWidth="2dp"
+            android:inputType="time" />
+    </com.google.android.material.textfield.TextInputLayout>
 
-            app:boxStrokeWidthFocused="3dp"
-            app:expandedHintEnabled="true"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout_tempoCozimento_RC"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="400dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/hint_cook_time"
+        app:boxStrokeColor="@color/black_coral"
 
-            app:hintTextColor="@color/black_coral"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+        app:boxStrokeWidth="2dp"
+        app:boxStrokeWidthFocused="3dp"
 
-            app:layout_constraintTop_toBottomOf="@+id/foto_RC"
-            app:startIconDrawable="@drawable/ic_prep"
-            app:startIconTint="@color/black_coral">
+        app:hintTextColor="@color/black_coral"
+        app:layout_constraintBottom_toTopOf="@+id/textInputLayout_porcoes_RC"
+        app:layout_constraintEnd_toEndOf="parent"
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/entrada_tempo_preparo"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="time" />
-        </com.google.android.material.textfield.TextInputLayout>
+        app:layout_constraintStart_toStartOf="parent"
+        app:startIconDrawable="@drawable/ic_hot_pot"
+        app:startIconTint="@color/black_coral">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputLayout_tempoCozimento_RC"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="400dp"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/entrada_tempo_cozimento"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/hint_cook_time"
-            app:boxStrokeColor="@color/black_coral"
-            app:boxStrokeWidth="2dp"
+            android:inputType="time" />
+    </com.google.android.material.textfield.TextInputLayout>
 
-            app:boxStrokeWidthFocused="3dp"
-            app:hintTextColor="@color/black_coral"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout_porcoes_RC"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="400dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="50dp"
+        android:hint="@string/hint_servings"
+        app:boxStrokeColor="@color/black_coral"
+        app:boxStrokeWidth="2dp"
 
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textInputLayout_tempoPreparo_RC"
+        app:boxStrokeWidthFocused="3dp"
+        app:hintTextColor="@color/black_coral"
 
-            app:startIconDrawable="@drawable/ic_hot_pot"
-            app:startIconTint="@color/black_coral">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/entrada_tempo_cozimento"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="time" />
-        </com.google.android.material.textfield.TextInputLayout>
+        app:startIconDrawable="@drawable/ic_serving"
+        app:startIconTint="@color/black_coral">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputLayout_porcoes_RC"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="400dp"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/entrada_porcoes"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/hint_servings"
-            app:boxStrokeColor="@color/black_coral"
-            app:boxStrokeWidth="2dp"
+            android:inputType="number" />
+    </com.google.android.material.textfield.TextInputLayout>
 
-            app:boxStrokeWidthFocused="3dp"
-            app:hintTextColor="@color/black_coral"
-
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textInputLayout_tempoCozimento_RC"
-
-            app:startIconDrawable="@drawable/ic_serving"
-            app:startIconTint="@color/black_coral">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/entrada_porcoes"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="number" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

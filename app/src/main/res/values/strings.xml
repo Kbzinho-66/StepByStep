@@ -18,4 +18,6 @@
     <string name="steps">Lista de Passos</string>
     <string name="save">Salvar</string>
     <string name="delete">Deletar</string>
+    <string name="take_pic">Tirar uma foto nova</string>
+    <string name="pick_from_gallery">Escolher uma foto da galeria</string>
 </resources>

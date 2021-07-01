@@ -11,7 +11,6 @@ import com.example.stepbystep.databinding.ReceitasFragmentRvIngredientesBinding
 class IngredientesFragmento: Fragment() {
 
     private var _binding: ReceitasFragmentRvIngredientesBinding? = null
-
     private val binding get() = _binding!!
 
     override fun onCreateView(
