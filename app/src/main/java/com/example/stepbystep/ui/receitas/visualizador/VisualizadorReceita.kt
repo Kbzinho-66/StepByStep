@@ -1,33 +1,32 @@
 package com.example.stepbystep.ui.receitas.visualizador
 
-import android.app.Application
 import android.os.Bundle
-import android.provider.DocumentsContract
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.example.stepbystep.data.AppDatabase
+import com.example.stepbystep.data.ReceitaDAO
 import com.example.stepbystep.databinding.VisualizadorFragmentBinding
-import kotlin.io.path.Path
 
 class VisualizadorReceita : Fragment() {
 
     private var _binding: VisualizadorFragmentBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
+
+    private val dao: ReceitaDAO by lazy {
+        requireContext().let { AppDatabase.getInstance(it).receitaDAO() }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         _binding = VisualizadorFragmentBinding.inflate(inflater, container, false)
-        val root: View = binding.root
 
-        return root
+        return binding.root
     }
 
     override fun onDestroyView() {

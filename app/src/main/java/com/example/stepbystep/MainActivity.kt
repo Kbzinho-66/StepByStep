@@ -14,6 +14,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.example.stepbystep.data.AppDatabase
 import com.example.stepbystep.databinding.MainActivityBinding
 import com.google.android.material.snackbar.Snackbar
 
@@ -50,6 +51,7 @@ class MainActivity : AppCompatActivity() {
 
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+        val dao = AppDatabase.getInstance(applicationContext).receitaDAO()
 
         if (!pediuPermissao) {
             pedirPermissao.launch(Manifest.permission.CAMERA)

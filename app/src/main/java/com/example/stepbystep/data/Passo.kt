@@ -1,6 +1,6 @@
-package com.example.stepbystep.model
+package com.example.stepbystep.data
 
-import android.net.Uri
+import androidx.room.Ignore
 
 /**
  * Interface para poder trabalhar com uma lista de diferentes tipos de passos
@@ -14,6 +14,7 @@ sealed interface Passo
  */
 
 sealed class PassoAbstrato(
-    open val descricao: String,
-    open val imagens: MutableList<Uri> = mutableListOf()
+    @Ignore open val descricao: String,
+    @Ignore open var pronto: Boolean,
+//    open val imagens: MutableList<Uri> = mutableListOf()
 ) : Passo
