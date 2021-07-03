@@ -7,7 +7,8 @@ import com.example.stepbystep.data.Receita
  * Interface de acesso ao banco de dados para a classe [Receita].
  */
 
-interface ReceitaDAO {
+@Dao
+interface DAO {
 
     // Queries para RecyclerViews
     @Query("SELECT * FROM receitas")
@@ -16,6 +17,9 @@ interface ReceitaDAO {
     @Query("SELECT uriFoto FROM receitas")
     fun buscarTodasFotos(): MutableList<String>
 
+    @Query("SELECT * FROM receitas WHERE id = :cod LIMIT 1")
+    fun buscarReceitaPorCodigo(cod: String): Receita
+
     /**
      * Queries para procurar uma receita específica.
      * Por seus tipos serem [ReceitaIngredientesPassos], o Room já une
@@ -23,16 +27,33 @@ interface ReceitaDAO {
      */
     @Transaction
     @Query("SELECT * FROM receitas WHERE id = :cod LIMIT 1")
-    fun buscarReceitaPorCodigo(cod: Int): ReceitaIngredientesPassos
+    fun buscarReceitaCompletaPorCodigo(cod: String): ReceitaIngredientesPassos
 
     @Transaction
     @Query("SELECT * FROM receitas WHERE nome = :nome LIMIT 1")
-    fun buscarReceitaPorNome(nome: String): ReceitaIngredientesPassos
+    fun buscarReceitaCompletaPorNome(nome: String): ReceitaIngredientesPassos
 
-    // Outras funções
+    /**
+     * Queries pra buscar ingredientes e passos de uma receita específica.
+     */
+    @Transaction
+    @Query("SELECT * FROM ingredientes WHERE id_receita = :cod")
+    fun buscarIngredientesReceita(cod: String): MutableList<Ingrediente>
+
+    @Transaction
+    @Query("SELECT * FROM passos_normais WHERE id_receita = :cod")
+    fun buscarPassosReceita(cod: String): MutableList<Passo>
+
+    // Métodos de conveniência
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun inserirReceita(receita: Receita): Long
 
-    @Update
+    @Delete
     fun deletarReceita(receita: Receita)
+
+    @Update
+    fun atualizarIngredientes(ingredientes: MutableList<Ingrediente>)
+
+    @Update
+    fun atualizarPassos(passos: MutableList<Passo>)
 }

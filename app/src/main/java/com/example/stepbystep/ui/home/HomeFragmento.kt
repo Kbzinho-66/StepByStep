@@ -28,14 +28,13 @@ class HomeFragmento : Fragment() {
 
         with (binding) {
             botaoAdicionarReceita.setOnClickListener {
-                findNavController().navigate(R.id.action_nav_home_to_nav_recipeCreator)
+                findNavController().navigate(R.id.action_nav_home_to_nav_detalhesReceita)
             }
             botaoLivroReceitas.setOnClickListener {
                 findNavController().navigate(R.id.action_nav_home_to_nav_gallery)
             }
             botaoProcurarIngrediente.setOnClickListener {
                 Snackbar.make(binding.root, "Ainda não implementado", Snackbar.LENGTH_LONG).show()
-                findNavController().navigate(R.id.action_nav_home_to_visualizadorReceita)
                 //TODO (Implementar tudo isso)
             }
             botaoProcurarTempo.setOnClickListener {

@@ -7,7 +7,7 @@ import kotlinx.serialization.Serializable
  * Classe de modelo para uma receita.
  */
 
-@TypeConverters(Converters::class)
+@TypeConverters(Conversores::class)
 @Serializable
 @Entity(tableName = "receitas")
 

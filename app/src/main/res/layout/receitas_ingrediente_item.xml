@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="60dp"
+    android:layout_height="120dp"
     android:background="@color/desert_sand">
 
     <CheckBox
@@ -11,32 +11,73 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="6dp"
+        app:layout_constraintBottom_toBottomOf="@+id/ingrediente_nome_layout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/ingrediente_nome_layout" />
 
-    <TextView
-        android:id="@+id/ingrediente_nome"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/ingrediente_nome_layout"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
+        android:layout_height="60dp"
+        android:minWidth="140dp"
+        android:textColorHint="@color/gunmetal"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/ingrediente_checkbox"
         app:layout_constraintTop_toTopOf="parent"
-        android:text="Bacon"
-        android:textColor="@color/black_coral"
-        android:textSize="20sp"
-        android:textStyle="bold"/>
+        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.0">
 
-    <TextView
-        android:id="@+id/ingrediente_quantidade"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/ingrediente_nome"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@android:color/transparent"
+            android:hint="Ingrediente"
+            android:minWidth="140dp"
+            android:textColor="@color/black_coral"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:maxLength="35"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/ingrediente_quantidade_layout"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
+        android:layout_height="60dp"
+        android:minWidth="130dp"
+        android:textColorHint="@color/gunmetal"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/ingrediente_nome"
-        app:layout_constraintTop_toTopOf="parent"
-        android:text="500g"
-        android:textColor="@color/black_coral"
-        android:textSize="18sp"/>
+        app:layout_constraintStart_toStartOf="@+id/ingrediente_nome_layout"
+        app:layout_constraintTop_toBottomOf="@+id/ingrediente_nome_layout"
+        app:layout_constraintVertical_bias="0.0">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/ingrediente_quantidade"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@android:color/transparent"
+            android:hint="Quantidade"
+            android:minWidth="130dp"
+            android:textColor="@color/black_coral"
+            android:textSize="18sp"
+            android:textStyle="italic" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <ImageButton
+        android:id="@+id/ingrediente_botao_deletar"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/ingrediente_quantidade_layout"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ingrediente_checkbox"
+        android:foreground="@drawable/ic_delete"
+        android:background="@android:color/transparent"/>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

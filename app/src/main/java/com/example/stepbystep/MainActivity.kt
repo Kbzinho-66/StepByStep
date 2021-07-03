@@ -66,7 +66,7 @@ class MainActivity : AppCompatActivity() {
 
             appBarConfiguration = AppBarConfiguration(
                 setOf(
-                    R.id.nav_telaInicial, R.id.nav_livroReceitas, R.id.nav_criador
+                    R.id.nav_telaInicial, R.id.nav_livroReceitas, R.id.nav_detalhesReceita
                 ), drawerLayout
             )
             setupActionBarWithNavController(navController, appBarConfiguration)
@@ -83,7 +83,7 @@ class MainActivity : AppCompatActivity() {
         menuInflater.inflate(R.menu.main, menu)
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
-            if (destination.id == R.id.nav_criador) {
+            if (destination.id == R.id.nav_detalhesReceita) {
                 menuInflater.inflate(R.menu.criador, menu)
             } else {
                 menu.clear()

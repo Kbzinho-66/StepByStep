@@ -13,7 +13,7 @@ import androidx.room.RoomDatabase
 @Database(entities = [Receita::class], version = 1)
 abstract class AppDatabase : RoomDatabase() {
 
-    abstract fun receitaDAO(): ReceitaDAO
+    abstract fun receitaDAO(): DAO
 
     companion object : SingletonHolder<AppDatabase, Context>( {
         Room.databaseBuilder(it.applicationContext

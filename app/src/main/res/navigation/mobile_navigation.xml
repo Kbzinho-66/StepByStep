@@ -14,11 +14,8 @@
             android:id="@+id/action_nav_home_to_nav_gallery"
             app:destination="@id/nav_livroReceitas" />
         <action
-            android:id="@+id/action_nav_home_to_nav_recipeCreator"
-            app:destination="@id/nav_criador" />
-        <action
-            android:id="@+id/action_nav_home_to_visualizadorReceita"
-            app:destination="@id/visualizadorReceita" />
+            android:id="@+id/action_nav_home_to_nav_detalhesReceita"
+            app:destination="@id/nav_detalhesReceita" />
     </fragment>
 
     <fragment
@@ -27,18 +24,19 @@
         android:label="@string/menu_gallery"
         tools:layout="@layout/galeria_fragment" >
         <action
-            android:id="@+id/action_nav_livroReceitas_to_nav_recipeCreator"
-            app:destination="@id/nav_criador" />
-        <action
-            android:id="@+id/action_nav_livroReceitas_to_visualizadorReceita"
-            app:destination="@id/visualizadorReceita" />
+            android:id="@+id/action_nav_livroReceitas_to_nav_detalhesReceita"
+            app:destination="@id/nav_detalhesReceita" />
     </fragment>
 
     <fragment
-        android:id="@+id/nav_criador"
-        android:name="com.example.stepbystep.ui.receitas.criador.CriadorReceita"
+        android:id="@+id/nav_detalhesReceita"
+        android:name="com.example.stepbystep.ui.receitas.DetalhesReceita"
         android:label="Criação de Receita"
-        tools:layout="@layout/criador_fragment">
+        tools:layout="@layout/detalhes_fragment">
+        <argument
+            android:name="codigoReceita"
+            app:argType="string"
+            android:defaultValue="null"/>
         <action
             android:id="@+id/action_nav_novaReceita_to_nav_listaIngredientes"
             app:destination="@id/nav_listaIngredientes" />
@@ -52,18 +50,18 @@
         android:name="com.example.stepbystep.ui.receitas.IngredientesFragmento"
         android:label="Lista de Ingredientes"
         tools:layout="@layout/receitas_fragment_rv_ingredientes">
-
+        <argument
+            android:name="codigoReceita"
+            app:argType="string"/>
     </fragment>
 
     <fragment
         android:id="@+id/nav_listaPassos"
         android:name="com.example.stepbystep.ui.receitas.PassosFragmento"
-        android:label="PassosFragmento" />
-
-    <fragment
-        android:id="@+id/visualizadorReceita"
-        android:name="com.example.stepbystep.ui.receitas.visualizador.VisualizadorReceita"
-        android:label="VisualizadorReceita"
-        tools:layout="@layout/criador_fragment"/>
+        android:label="PassosFragmento">
+        <argument
+            android:name="codigoReceita"
+            app:argType="string"/>
+    </fragment>
 
 </navigation>
