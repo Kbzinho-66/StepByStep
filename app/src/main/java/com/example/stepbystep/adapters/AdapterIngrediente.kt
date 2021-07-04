@@ -5,7 +5,9 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.stepbystep.data.Ingrediente
+import com.example.stepbystep.data.dao.AppDatabase
+import com.example.stepbystep.data.entities.Ingrediente
+import com.example.stepbystep.data.dao.IngredienteDAO
 import com.example.stepbystep.databinding.ReceitasIngredienteItemBinding as IngredienteBinding
 
 /**
@@ -15,7 +17,11 @@ import com.example.stepbystep.databinding.ReceitasIngredienteItemBinding as Ingr
 
 class AdapterIngrediente(
     private val ingredientes: MutableList<Ingrediente>,
-    val contexto: Context) : RecyclerView.Adapter<AdapterIngrediente.IngredienteHolder>() {
+    private val contexto: Context) : RecyclerView.Adapter<AdapterIngrediente.IngredienteHolder>() {
+
+    private val db: IngredienteDAO by lazy {
+        AppDatabase.getInstance(contexto).ingredienteDAO()
+    }
 
     inner class IngredienteHolder(private val layoutBinding: IngredienteBinding) :
         RecyclerView.ViewHolder(layoutBinding.root) {
@@ -26,7 +32,7 @@ class AdapterIngrediente(
                 (ingredienteNome as TextView).text = ingrediente.nome
                 (ingredienteQuantidade as TextView).text = ingrediente.quantidade
                 ingredienteBotaoDeletar.setOnClickListener {
-                    // TODO (Deletar esse item)
+                    db.deletarIngrediente(ingrediente.idIngrediente)
                 }
             }
         }
@@ -46,11 +52,9 @@ class AdapterIngrediente(
 
     override fun onBindViewHolder(holder: AdapterIngrediente.IngredienteHolder, position: Int) {
 
-        val ingrediente: Ingrediente = ingredientes[position]
+        val ingrediente = ingredientes[position]
 
-        with (holder) {
-            setIngrediente(ingrediente)
-        }
+        holder.setIngrediente(ingrediente)
     }
 
     override fun getItemCount(): Int = ingredientes.size

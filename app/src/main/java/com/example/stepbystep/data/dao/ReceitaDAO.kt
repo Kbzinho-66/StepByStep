@@ -1,21 +1,19 @@
-package com.example.stepbystep.data
+package com.example.stepbystep.data.dao
 
 import androidx.room.*
-import com.example.stepbystep.data.Receita
+import com.example.stepbystep.data.entities.Passo
+import com.example.stepbystep.data.entities.Receita
+import com.example.stepbystep.data.entities.ReceitaIngredientesPassos
 
 /**
  * Interface de acesso ao banco de dados para a classe [Receita].
  */
 
 @Dao
-interface DAO {
+interface ReceitaDAO {
 
-    // Queries para RecyclerViews
-    @Query("SELECT * FROM receitas")
-    fun buscarTodasReceitas(): MutableList<Receita>
-
-    @Query("SELECT uriFoto FROM receitas")
-    fun buscarTodasFotos(): MutableList<String>
+    @Query("SELECT uriFoto, id FROM receitas")
+    fun buscarTodasFotos(): MutableList<Pair<String, String>>
 
     @Query("SELECT * FROM receitas WHERE id = :cod LIMIT 1")
     fun buscarReceitaPorCodigo(cod: String): Receita
@@ -33,15 +31,8 @@ interface DAO {
     @Query("SELECT * FROM receitas WHERE nome = :nome LIMIT 1")
     fun buscarReceitaCompletaPorNome(nome: String): ReceitaIngredientesPassos
 
-    /**
-     * Queries pra buscar ingredientes e passos de uma receita específica.
-     */
     @Transaction
-    @Query("SELECT * FROM ingredientes WHERE id_receita = :cod")
-    fun buscarIngredientesReceita(cod: String): MutableList<Ingrediente>
-
-    @Transaction
-    @Query("SELECT * FROM passos_normais WHERE id_receita = :cod")
+    @Query("SELECT * FROM passos WHERE id_receita = :cod")
     fun buscarPassosReceita(cod: String): MutableList<Passo>
 
     // Métodos de conveniência
@@ -50,9 +41,6 @@ interface DAO {
 
     @Delete
     fun deletarReceita(receita: Receita)
-
-    @Update
-    fun atualizarIngredientes(ingredientes: MutableList<Ingrediente>)
 
     @Update
     fun atualizarPassos(passos: MutableList<Passo>)

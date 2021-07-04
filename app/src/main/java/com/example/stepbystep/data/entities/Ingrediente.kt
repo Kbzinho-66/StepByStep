@@ -1,4 +1,4 @@
-package com.example.stepbystep.data
+package com.example.stepbystep.data.entities
 
 import androidx.room.*
 

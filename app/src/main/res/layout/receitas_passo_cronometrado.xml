@@ -3,52 +3,71 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="60dp"
+    android:layout_height="120dp"
     android:background="@color/desert_sand">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="350dp"
-        android:layout_height="match_parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/desert_sand"
-            android:fontFamily="casual"
-            android:textColor="@color/smoky_black"
-            android:textSize="20sp"
-            tools:text="Dourar o alho e a cebola" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <Chronometer
-        android:id="@+id/cronometro"
-        android:layout_width="55dp"
-        android:layout_height="55dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <ImageButton
+        android:id="@+id/passo_iniciar_timer"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:background="@android:color/transparent"
+        android:foreground="@drawable/ic_timer"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toTopOf="@+id/passo_botao_deletar"
+        app:layout_constraintEnd_toStartOf="@+id/textInputLayout"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:format="H:MM"
-        android:gravity="center">
+        tools:ignore="ContentDescription" />
 
-    </Chronometer>
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout"
+        android:layout_width="350dp"
+        android:layout_height="100dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0">
 
-<!--    <ImageButton-->
-<!--        android:id="@+id/botaoIniciarTimer"-->
-<!--        style="@style/Widget.AppCompat.Button.Borderless.Colored"-->
-<!--        android:layout_width="55dp"-->
-<!--        android:layout_height="55dp"-->
-<!--        android:foreground="@drawable/ic_timer"-->
-<!--        android:foregroundTint="@color/black_coral"-->
-<!--        android:scaleType="fitCenter"-->
-<!--        android:adjustViewBounds="true"-->
-<!--        android:padding="20dp"-->
-<!--        android:cropToPadding="true"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent"-->
-<!--        tools:ignore="ContentDescription" />-->
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/passo_descricao"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:backgroundTint="@color/desert_sand"
+            android:fontFamily="casual"
+            android:hint="@string/step_description"
+            android:inputType="textMultiLine"
+            android:textColor="@color/smoky_black"
+            android:textSize="20sp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <ProgressBar
+        android:id="@+id/passo_progresso"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout"
+        android:progress="25"
+        android:progressBackgroundTint="@color/smoky_black"
+        android:progressBackgroundTintMode="add"
+        android:progressTint="@color/medium_carmine"/>
+
+    <ImageButton
+        android:id="@+id/passo_botao_deletar"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_marginBottom="1dp"
+        android:background="@android:color/transparent"
+        android:foreground="@drawable/ic_delete"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toTopOf="@+id/passo_progresso"
+        app:layout_constraintEnd_toStartOf="@+id/textInputLayout"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="ContentDescription" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

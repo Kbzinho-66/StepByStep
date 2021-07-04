@@ -52,7 +52,8 @@
         tools:layout="@layout/receitas_fragment_rv_ingredientes">
         <argument
             android:name="codigoReceita"
-            app:argType="string"/>
+            app:argType="string"
+            android:defaultValue="null"/>
     </fragment>
 
     <fragment
@@ -61,7 +62,8 @@
         android:label="PassosFragmento">
         <argument
             android:name="codigoReceita"
-            app:argType="string"/>
+            app:argType="string"
+            android:defaultValue="null"/>
     </fragment>
 
 </navigation>

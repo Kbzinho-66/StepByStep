@@ -4,6 +4,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupMenu
@@ -15,10 +16,11 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.example.stepbystep.R
-import com.example.stepbystep.data.AppDatabase
-import com.example.stepbystep.data.DAO
-import com.example.stepbystep.data.Receita
+import com.example.stepbystep.data.dao.AppDatabase
+import com.example.stepbystep.data.dao.ReceitaDAO
+import com.example.stepbystep.data.entities.Receita
 import com.example.stepbystep.databinding.DetalhesFragmentBinding
+import com.google.android.material.snackbar.Snackbar
 import java.io.File
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -26,13 +28,13 @@ import java.util.concurrent.TimeUnit
 
 class DetalhesReceita : Fragment(){
 
-
     private var _binding: DetalhesFragmentBinding? = null
     private val binding get() = _binding!!
 
-    private val db: DAO by lazy {
+    private val db: ReceitaDAO by lazy {
         AppDatabase.getInstance(requireContext()).receitaDAO()
     }
+
     private val args: DetalhesReceitaArgs by navArgs()
     private var uriFoto: Uri? = null
 
@@ -83,44 +85,65 @@ class DetalhesReceita : Fragment(){
             db.buscarReceitaPorCodigo(codigoReceita)
         }
 
+        with (binding) {
+            // Setar os listeners dos botões
+            fotoRC.setOnClickListener {
+                registerForContextMenu(fotoRC)
+                mostrarMenu(fotoRC)
+            }
+
+            botaoIngredientesRC.setOnClickListener {
+                val acao = DetalhesReceitaDirections
+                    .actionNavNovaReceitaToNavListaIngredientes(codigoReceita)
+                findNavController().navigate(acao)
+            }
+
+            botaoPassosRC.setOnClickListener {
+                val acao = DetalhesReceitaDirections
+                    .actionNavNovaReceitaToPassosFragmento(codigoReceita)
+                findNavController().navigate(acao)
+            }
+
+        }
+
         if (receita != null) {
+
+            // Atualizar os campos de dados se a receita não for null
             with (binding) {
 
-                // Atualizar os campos de dados
                 Glide.with(this@DetalhesReceita).load(receita.uriFoto).into(fotoRC)
                 (entradaNome as TextView).text = receita.nome
                 (entradaTempoPreparo as TextView).text = millisToString(receita.tempoPreparoMilis)
                 (entradaTempoCozimento as TextView).text = millisToString(receita.tempoCozimentoMilis)
-
-                // Setar os listeners dos botões
-                fotoRC.setOnClickListener {
-                    registerForContextMenu(fotoRC)
-                    mostrarMenu(fotoRC)
-                }
-
-                botaoIngredientesRC.setOnClickListener {
-                    val acao = DetalhesReceitaDirections.actionNavNovaReceitaToNavListaIngredientes(codigoReceita)
-                    findNavController().navigate(acao)
-                }
-
-                botaoPassosRC.setOnClickListener {
-                    val acao = DetalhesReceitaDirections.actionNavNovaReceitaToPassosFragmento(codigoReceita)
-                    findNavController().navigate(acao)
-                }
-
-                return root
             }
-        } else {
-
-            return binding.root
         }
 
-
+        return binding.root
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
+        R.id.action_save -> {
+            Snackbar.make(binding.root, "Salvar Receita Nova", Snackbar.LENGTH_SHORT)
+            true
+        }
+        R.id.action_delete -> {
+            Snackbar.make(binding.root, "Deletar Receita Nova", Snackbar.LENGTH_SHORT)
+            true
+        }
+        else -> super.onOptionsItemSelected(item)
+    }
+
+    fun salvarReceita() {
+        Snackbar.make(binding.root, "Salvar receita", Snackbar.LENGTH_LONG).show()
+    }
+
+    fun deletarReceita() {
+        Snackbar.make(binding.root, "Deletar receita", Snackbar.LENGTH_LONG).show()
     }
 
     private fun mostrarMenu(view: View) {
@@ -172,7 +195,7 @@ class DetalhesReceita : Fragment(){
 
     }
 
-    fun millisToString(millis: Long) =
+    private fun millisToString(millis: Long) =
         String.format(
             "%02d:%02d:%02d",
             TimeUnit.MILLISECONDS.toHours(millis),

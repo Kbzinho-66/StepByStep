@@ -20,4 +20,5 @@
     <string name="delete">Deletar</string>
     <string name="take_pic">Tirar uma foto nova</string>
     <string name="pick_from_gallery">Escolher uma foto da galeria</string>
+    <string name="step_description">Descreva o passo</string>
 </resources>

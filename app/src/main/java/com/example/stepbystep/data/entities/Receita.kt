@@ -1,6 +1,7 @@
-package com.example.stepbystep.data
+package com.example.stepbystep.data.entities
 
 import androidx.room.*
+import com.example.stepbystep.data.Conversores
 import kotlinx.serialization.Serializable
 
 /**

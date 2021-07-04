@@ -1,19 +1,24 @@
-package com.example.stepbystep.data
+package com.example.stepbystep.data.dao
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.example.stepbystep.data.entities.Receita
 
 /**
  * Classe responsável pelo acesso ao banco de dados usando Room.
- * Contém uma referência para o DAO que será usado ao longo do aplicativo.
+ * Contém uma referência para o ReceitaDAO que será usado ao longo do aplicativo.
  */
 
 @Database(entities = [Receita::class], version = 1)
 abstract class AppDatabase : RoomDatabase() {
 
-    abstract fun receitaDAO(): DAO
+    abstract fun receitaDAO(): ReceitaDAO
+
+    abstract fun ingredienteDAO(): IngredienteDAO
+
+    abstract fun passoDAO(): PassoDAO
 
     companion object : SingletonHolder<AppDatabase, Context>( {
         Room.databaseBuilder(it.applicationContext

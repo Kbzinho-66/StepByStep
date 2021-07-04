@@ -1,4 +1,4 @@
-package com.example.stepbystep.data
+package com.example.stepbystep.data.entities
 
 import androidx.room.*
 
@@ -9,7 +9,7 @@ import androidx.room.*
  */
 
 @Entity(
-    tableName = "passos_normais",
+    tableName = "passos",
     foreignKeys = [
         ForeignKey(entity = Receita::class, parentColumns = ["id"], childColumns = ["id_receita"])
     ],
@@ -17,18 +17,15 @@ import androidx.room.*
 )
 data class PassoNormal(
 
-    //TODO (Colocar um indicador da ordem dos passos)
-
-    // O id da receita à qual esse passo está vinculado
     @ColumnInfo(name = "id_receita") val idReceita: String,
-
     @ColumnInfo(name = "descricao_passo") override var descricao: String,
-    @Ignore override var pronto: Boolean = false,
+    @ColumnInfo(name = "realizado") override var pronto: Boolean = false,
+    @ColumnInfo(name = "ordem") override var ordem: Int,
+    @ColumnInfo(name = "cronometrado") override val cronometrado: Boolean = false,
 
-) : PassoAbstrato(descricao, pronto) {
+) : Passo {
 
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
     var idPasso: Long = 0
-
 }

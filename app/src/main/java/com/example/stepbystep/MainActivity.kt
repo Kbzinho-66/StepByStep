@@ -14,8 +14,9 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import com.example.stepbystep.data.AppDatabase
+import com.example.stepbystep.data.dao.AppDatabase
 import com.example.stepbystep.databinding.MainActivityBinding
+import com.example.stepbystep.ui.receitas.DetalhesReceita
 import com.google.android.material.snackbar.Snackbar
 
 class MainActivity : AppCompatActivity() {
@@ -51,7 +52,10 @@ class MainActivity : AppCompatActivity() {
 
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        val dao = AppDatabase.getInstance(applicationContext).receitaDAO()
+
+        // Inicializar o Singleton com o contexto da aplicação
+        val receitaDao = AppDatabase.getInstance(applicationContext).receitaDAO()
+
 
         if (!pediuPermissao) {
             pedirPermissao.launch(Manifest.permission.CAMERA)
@@ -83,11 +87,21 @@ class MainActivity : AppCompatActivity() {
         menuInflater.inflate(R.menu.main, menu)
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
-            if (destination.id == R.id.nav_detalhesReceita) {
-                menuInflater.inflate(R.menu.criador, menu)
-            } else {
-                menu.clear()
-                menuInflater.inflate(R.menu.main, menu)
+            when (destination.id) {
+
+                R.id.nav_detalhesReceita -> {
+                    menuInflater.inflate(R.menu.criador, menu)
+                }
+
+                R.id.nav_listaIngredientes, R.id.nav_listaPassos -> {
+                    menu.clear()
+                    menuInflater.inflate(R.menu.menu_listas, menu)
+                }
+
+                else -> {
+                    menu.clear()
+                    menuInflater.inflate(R.menu.main, menu)
+                }
             }
         }
 
@@ -97,12 +111,12 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
 
         R.id.action_save -> {
-            Snackbar.make(binding.root, "Salvar", Snackbar.LENGTH_LONG).show()
+            DetalhesReceita().salvarReceita()
             true
         }
 
         R.id.action_delete -> {
-            Snackbar.make(binding.root, "Deletar", Snackbar.LENGTH_LONG).show()
+            DetalhesReceita().deletarReceita()
             true
         }
 

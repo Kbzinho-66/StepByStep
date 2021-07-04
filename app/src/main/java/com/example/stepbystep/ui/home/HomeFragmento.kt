@@ -13,9 +13,6 @@ import com.google.android.material.snackbar.Snackbar
 class HomeFragmento : Fragment() {
 
     private var _binding: HomeFragmentBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
 
     override fun onCreateView(
