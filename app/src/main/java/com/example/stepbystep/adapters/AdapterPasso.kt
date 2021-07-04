@@ -22,7 +22,8 @@ import com.example.stepbystep.databinding.ReceitasPassoItemBinding as NormalBind
 
 class AdapterPasso(
     private val passos: MutableList<Passo>,
-    private val contexto: Context) : RecyclerView.Adapter<AdapterPasso.PassoHolder>() {
+    private val contexto: Context
+) : RecyclerView.Adapter<AdapterPasso.PassoHolder>() {
 
     private val db: PassoDAO by lazy {
         AppDatabase.getInstance(contexto).passoDAO()
@@ -36,7 +37,7 @@ class AdapterPasso(
             when (passo) {
 
                 is PassoNormal -> {
-                    with (layoutBinding as NormalBinding) {
+                    with(layoutBinding as NormalBinding) {
                         passoCheckbox.isChecked = passo.pronto
                         (passoDescricao as TextView).text = passo.descricao
                         passoBotaoDeletar.setOnClickListener {
@@ -45,7 +46,7 @@ class AdapterPasso(
                     }
                 }
                 is PassoCronometrado -> {
-                    with (layoutBinding as CronometradoBinding) {
+                    with(layoutBinding as CronometradoBinding) {
                         (passoDescricao as TextView).text = passo.descricao
                         passoBotaoDeletar.setOnClickListener {
                             db.deletarPasso(passo.idPasso)

@@ -11,7 +11,7 @@ import com.example.stepbystep.data.entities.Receita
  * Contém uma referência para o ReceitaDAO que será usado ao longo do aplicativo.
  */
 
-@Database(entities = [Receita::class], version = 1)
+@Database(entities = [Receita::class], version = 1, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun receitaDAO(): ReceitaDAO
@@ -20,16 +20,17 @@ abstract class AppDatabase : RoomDatabase() {
 
     abstract fun passoDAO(): PassoDAO
 
-    companion object : SingletonHolder<AppDatabase, Context>( {
-        Room.databaseBuilder(it.applicationContext
-            , AppDatabase::class.java
-            , "receitas.db").build()
-    } )
+    companion object : SingletonHolder<AppDatabase, Context>({
+        Room.databaseBuilder(
+            it.applicationContext, AppDatabase::class.java, "receitas.db"
+        ).build()
+    })
 }
 
-open class SingletonHolder<out T: Any, in A>(creator: (A) -> T) {
+open class SingletonHolder<out T : Any, in A>(creator: (A) -> T) {
     private var creator: ((A) -> T)? = creator
-    @Volatile private var instance: T? = null
+    @Volatile
+    private var instance: T? = null
 
     fun getInstance(arg: A): T {
         val i = instance

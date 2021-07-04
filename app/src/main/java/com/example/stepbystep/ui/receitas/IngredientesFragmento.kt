@@ -11,12 +11,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.stepbystep.R
 import com.example.stepbystep.adapters.AdapterIngrediente
 import com.example.stepbystep.data.dao.AppDatabase
-import com.example.stepbystep.data.entities.Ingrediente
 import com.example.stepbystep.data.dao.IngredienteDAO
+import com.example.stepbystep.data.entities.Ingrediente
 import com.example.stepbystep.databinding.ReceitasFragmentRvIngredientesBinding
 import com.google.android.material.snackbar.Snackbar
 
-class IngredientesFragmento: Fragment() {
+class IngredientesFragmento : Fragment() {
 
     private var _binding: ReceitasFragmentRvIngredientesBinding? = null
     private val binding get() = _binding!!
@@ -54,7 +54,7 @@ class IngredientesFragmento: Fragment() {
 
     private fun inicializarRecyclerView() {
 
-        val layoutManager = LinearLayoutManager(activity).also{
+        val layoutManager = LinearLayoutManager(activity).also {
             it.orientation = LinearLayoutManager.VERTICAL
         }
 

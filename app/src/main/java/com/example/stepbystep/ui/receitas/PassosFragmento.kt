@@ -55,7 +55,7 @@ class PassosFragmento : Fragment() {
 
     private fun inicializarRecyclerView() {
 
-        val layoutManager = LinearLayoutManager(activity).also{
+        val layoutManager = LinearLayoutManager(activity).also {
             it.orientation = LinearLayoutManager.VERTICAL
         }
 

@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
     // Variáveis de layout e navegação
     private lateinit var appBarConfiguration: AppBarConfiguration
     private val binding: MainActivityBinding by lazy { MainActivityBinding.inflate(layoutInflater) }
-    private lateinit var navController : NavController
+    private lateinit var navController: NavController
 
     // Variáveis de permissão
     private var pediuPermissao: Boolean = false
@@ -65,7 +65,7 @@ class MainActivity : AppCompatActivity() {
             .findFragmentById(R.id.nav_host_fragment_content_main) as NavHostFragment
         navController = navHostFragment.navController
 
-        with (binding) {
+        with(binding) {
             setSupportActionBar(appBarMain.toolbar)
 
             appBarConfiguration = AppBarConfiguration(
@@ -77,7 +77,6 @@ class MainActivity : AppCompatActivity() {
 
             navView.setupWithNavController(navController)
         }
-
 
 
     }

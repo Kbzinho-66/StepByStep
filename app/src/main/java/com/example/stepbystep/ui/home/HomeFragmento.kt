@@ -23,7 +23,7 @@ class HomeFragmento : Fragment() {
 
         _binding = HomeFragmentBinding.inflate(inflater, container, false)
 
-        with (binding) {
+        with(binding) {
             botaoAdicionarReceita.setOnClickListener {
                 findNavController().navigate(R.id.action_nav_home_to_nav_detalhesReceita)
             }

@@ -6,8 +6,8 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.stepbystep.data.dao.AppDatabase
-import com.example.stepbystep.data.entities.Ingrediente
 import com.example.stepbystep.data.dao.IngredienteDAO
+import com.example.stepbystep.data.entities.Ingrediente
 import com.example.stepbystep.databinding.ReceitasIngredienteItemBinding as IngredienteBinding
 
 /**
@@ -17,7 +17,8 @@ import com.example.stepbystep.databinding.ReceitasIngredienteItemBinding as Ingr
 
 class AdapterIngrediente(
     private val ingredientes: MutableList<Ingrediente>,
-    private val contexto: Context) : RecyclerView.Adapter<AdapterIngrediente.IngredienteHolder>() {
+    private val contexto: Context
+) : RecyclerView.Adapter<AdapterIngrediente.IngredienteHolder>() {
 
     private val db: IngredienteDAO by lazy {
         AppDatabase.getInstance(contexto).ingredienteDAO()
@@ -27,7 +28,7 @@ class AdapterIngrediente(
         RecyclerView.ViewHolder(layoutBinding.root) {
 
         fun setIngrediente(ingrediente: Ingrediente) {
-            with (layoutBinding) {
+            with(layoutBinding) {
                 ingredienteCheckbox.isChecked = false
                 (ingredienteNome as TextView).text = ingrediente.nome
                 (ingredienteQuantidade as TextView).text = ingrediente.quantidade

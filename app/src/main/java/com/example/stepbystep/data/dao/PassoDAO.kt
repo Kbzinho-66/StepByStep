@@ -1,7 +1,6 @@
 package com.example.stepbystep.data.dao
 
 import androidx.room.*
-import com.example.stepbystep.data.entities.Ingrediente
 import com.example.stepbystep.data.entities.Passo
 
 /**

@@ -47,14 +47,14 @@
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout"
         android:progress="25"
         android:progressBackgroundTint="@color/smoky_black"
         android:progressBackgroundTintMode="add"
-        android:progressTint="@color/medium_carmine"/>
+        android:progressTint="@color/medium_carmine"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
 
     <ImageButton
         android:id="@+id/passo_botao_deletar"

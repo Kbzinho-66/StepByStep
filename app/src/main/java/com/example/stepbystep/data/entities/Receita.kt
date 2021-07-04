@@ -8,11 +8,10 @@ import kotlinx.serialization.Serializable
  * Classe de modelo para uma receita.
  */
 
-@TypeConverters(Conversores::class)
 @Serializable
 @Entity(tableName = "receitas")
 
-data class Receita (
+data class Receita(
     @PrimaryKey @ColumnInfo(name = "id") val codigo: String,
     val nome: String,
     val uriFoto: String = "",

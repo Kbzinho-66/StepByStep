@@ -23,7 +23,7 @@ data class PassoNormal(
     @ColumnInfo(name = "ordem") override var ordem: Int,
     @ColumnInfo(name = "cronometrado") override val cronometrado: Boolean = false,
 
-) : Passo {
+    ) : Passo {
 
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")

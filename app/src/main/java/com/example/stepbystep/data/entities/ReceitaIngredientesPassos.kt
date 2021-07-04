@@ -1,6 +1,7 @@
 package com.example.stepbystep.data.entities
 
 import androidx.room.Embedded
+import androidx.room.Entity
 import androidx.room.Relation
 
 /**
@@ -9,14 +10,15 @@ import androidx.room.Relation
  * para uma [Receita].
  */
 
-data class ReceitaIngredientesPassos(
-
-    @Embedded
-    val receita: Receita,
-
-    @Relation(parentColumn = "id", entityColumn = "id_receita")
-    val ingredientes: MutableList<Ingrediente> = mutableListOf(),
-
-    @Relation(parentColumn = "id", entityColumn = "id_receita")
-    val passos: List<Passo> = emptyList()
-)
+//@Entity
+//data class ReceitaIngredientesPassos(
+//
+//    @Embedded
+//    val receita: Receita,
+//
+//    @Relation(parentColumn = "id", entityColumn = "id_receita")
+//    val ingredientes: MutableList<Ingrediente> = mutableListOf(),
+//
+//    @Relation(parentColumn = "id", entityColumn = "id_receita")
+//    val passos: List<Passo> = emptyList()
+//)

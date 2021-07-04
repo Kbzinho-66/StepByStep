@@ -22,7 +22,7 @@
         android:id="@+id/nav_livroReceitas"
         android:name="com.example.stepbystep.ui.galeria.GaleriaFragmento"
         android:label="@string/menu_gallery"
-        tools:layout="@layout/galeria_fragment" >
+        tools:layout="@layout/galeria_fragment">
         <action
             android:id="@+id/action_nav_livroReceitas_to_nav_detalhesReceita"
             app:destination="@id/nav_detalhesReceita" />
@@ -35,8 +35,8 @@
         tools:layout="@layout/detalhes_fragment">
         <argument
             android:name="codigoReceita"
-            app:argType="string"
-            android:defaultValue="null"/>
+            android:defaultValue="null"
+            app:argType="string" />
         <action
             android:id="@+id/action_nav_novaReceita_to_nav_listaIngredientes"
             app:destination="@id/nav_listaIngredientes" />
@@ -52,8 +52,8 @@
         tools:layout="@layout/receitas_fragment_rv_ingredientes">
         <argument
             android:name="codigoReceita"
-            app:argType="string"
-            android:defaultValue="null"/>
+            android:defaultValue="null"
+            app:argType="string" />
     </fragment>
 
     <fragment
@@ -62,8 +62,8 @@
         android:label="PassosFragmento">
         <argument
             android:name="codigoReceita"
-            app:argType="string"
-            android:defaultValue="null"/>
+            android:defaultValue="null"
+            app:argType="string" />
     </fragment>
 
 </navigation>

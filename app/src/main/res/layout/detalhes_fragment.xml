@@ -8,108 +8,108 @@
     android:background="@color/desert_sand"
     tools:context=".ui.receitas.DetalhesReceita">
 
-        <com.google.android.material.appbar.AppBarLayout
-            android:id="@+id/appBarLayoutRC"
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayoutRC"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/Theme.Cookbook.AppBarOverlay"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/Theme.Cookbook.PopupOverlay" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <ImageView
+        android:id="@+id/foto_RC"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="100dp"
+        android:foreground="@drawable/ic_camera"
+        android:foregroundTint="@color/black_coral"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayoutRC"
+        tools:ignore="ContentDescription" />
+
+    <ImageButton
+        android:id="@+id/botao_ingredientes_RC"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="20dp"
+        android:background="@android:color/transparent"
+        android:foreground="@drawable/ic_ingredients"
+        android:foregroundTint="@color/black_coral"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.25"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/foto_RC"
+        tools:ignore="ContentDescription" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="@string/ingredients"
+        android:textColor="@color/black_coral"
+        app:layout_constraintEnd_toEndOf="@+id/botao_ingredientes_RC"
+        app:layout_constraintStart_toStartOf="@+id/botao_ingredientes_RC"
+        app:layout_constraintTop_toBottomOf="@+id/botao_ingredientes_RC" />
+
+    <ImageButton
+        android:id="@+id/botao_passos_RC"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="20dp"
+        android:background="@android:color/transparent"
+        android:foreground="@drawable/ic_steps"
+        android:foregroundTint="@color/black_coral"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.75"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/foto_RC"
+        tools:ignore="ContentDescription" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout_nome_RC"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="400dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/name_hint"
+        app:boxStrokeColor="@color/black_coral"
+        app:boxStrokeWidth="2dp"
+        app:boxStrokeWidthFocused="3dp"
+
+        app:hintTextColor="@color/black_coral"
+        app:layout_constraintBottom_toTopOf="@+id/foto_RC"
+        app:layout_constraintEnd_toEndOf="parent"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayoutRC">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/entrada_nome"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:theme="@style/Theme.Cookbook.AppBarOverlay"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:gravity="center" />
+    </com.google.android.material.textfield.TextInputLayout>
 
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:background="?attr/colorPrimary"
-                app:popupTheme="@style/Theme.Cookbook.PopupOverlay" />
-
-        </com.google.android.material.appbar.AppBarLayout>
-
-        <ImageView
-            android:id="@+id/foto_RC"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            android:layout_marginTop="100dp"
-            android:foreground="@drawable/ic_camera"
-            android:foregroundTint="@color/black_coral"
-
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/appBarLayoutRC"
-            tools:ignore="ContentDescription" />
-
-        <ImageButton
-            android:id="@+id/botao_ingredientes_RC"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_marginTop="20dp"
-            android:background="@android:color/transparent"
-            android:foreground="@drawable/ic_ingredients"
-            android:foregroundTint="@color/black_coral"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.25"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/foto_RC"
-            tools:ignore="ContentDescription" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:text="@string/ingredients"
-            android:textColor="@color/black_coral"
-            app:layout_constraintEnd_toEndOf="@+id/botao_ingredientes_RC"
-            app:layout_constraintStart_toStartOf="@+id/botao_ingredientes_RC"
-            app:layout_constraintTop_toBottomOf="@+id/botao_ingredientes_RC" />
-
-        <ImageButton
-            android:id="@+id/botao_passos_RC"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_marginTop="20dp"
-            android:background="@android:color/transparent"
-            android:foreground="@drawable/ic_steps"
-            android:foregroundTint="@color/black_coral"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.75"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/foto_RC"
-            tools:ignore="ContentDescription" />
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputLayout_nome_RC"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="400dp"
-            android:layout_height="wrap_content"
-            android:hint="@string/name_hint"
-            app:boxStrokeColor="@color/black_coral"
-            app:boxStrokeWidth="2dp"
-            app:boxStrokeWidthFocused="3dp"
-
-            app:hintTextColor="@color/black_coral"
-            app:layout_constraintBottom_toTopOf="@+id/foto_RC"
-            app:layout_constraintEnd_toEndOf="parent"
-
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/appBarLayoutRC">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/entrada_nome"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:text="@string/steps"
-            android:textColor="@color/black_coral"
-            app:layout_constraintEnd_toEndOf="@+id/botao_passos_RC"
-            app:layout_constraintStart_toStartOf="@+id/botao_passos_RC"
-            app:layout_constraintTop_toBottomOf="@+id/botao_passos_RC" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="@string/steps"
+        android:textColor="@color/black_coral"
+        app:layout_constraintEnd_toEndOf="@+id/botao_passos_RC"
+        app:layout_constraintStart_toStartOf="@+id/botao_passos_RC"
+        app:layout_constraintTop_toBottomOf="@+id/botao_passos_RC" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout_tempoPreparo_RC"
