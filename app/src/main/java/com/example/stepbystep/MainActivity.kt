@@ -8,6 +8,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
+import androidx.navigation.NavDestination
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
@@ -48,6 +49,8 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+    private lateinit var fragmentoAtual: NavDestination
+
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
@@ -86,6 +89,8 @@ class MainActivity : AppCompatActivity() {
         menuInflater.inflate(R.menu.main, menu)
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
+            fragmentoAtual = destination
+            menu.clear()
             when (destination.id) {
 
                 R.id.nav_detalhesReceita -> {
@@ -93,12 +98,10 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 R.id.nav_listaIngredientes, R.id.nav_listaPassos -> {
-                    menu.clear()
                     menuInflater.inflate(R.menu.menu_listas, menu)
                 }
 
                 else -> {
-                    menu.clear()
                     menuInflater.inflate(R.menu.main, menu)
                 }
             }
@@ -110,12 +113,10 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
 
         R.id.action_save -> {
-            DetalhesReceita().salvarReceita()
             true
         }
 
         R.id.action_delete -> {
-            DetalhesReceita().deletarReceita()
             true
         }
 

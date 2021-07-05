@@ -16,24 +16,7 @@ interface ReceitaDAO {
     fun buscarTodasReceitas(): MutableList<Receita>
 
     @Query("SELECT * FROM receitas WHERE id = :cod LIMIT 1")
-    fun buscarReceitaPorCodigo(cod: String): Receita
-
-    /**
-     * Queries para procurar uma receita específica.
-     * Por seus tipos serem [ReceitaIngredientesPassos], o Room já une
-     * as 3 tabelas em uma só e retorna um objeto composto das 3.
-     */
-//    @Transaction
-//    @Query("SELECT * FROM receitas WHERE id = :cod LIMIT 1")
-//    fun buscarReceitaCompletaPorCodigo(cod: String): ReceitaIngredientesPassos
-//
-//    @Transaction
-//    @Query("SELECT * FROM receitas WHERE nome = :nome LIMIT 1")
-//    fun buscarReceitaCompletaPorNome(nome: String): ReceitaIngredientesPassos
-//
-//    @Transaction
-//    @Query("SELECT * FROM passos WHERE id_receita = :cod")
-//    fun buscarPassosReceita(cod: String): MutableList<Passo>
+    fun buscarReceitaPorCodigo(cod: Long): Receita
 
     // Métodos de conveniência
     @Insert(onConflict = OnConflictStrategy.REPLACE)

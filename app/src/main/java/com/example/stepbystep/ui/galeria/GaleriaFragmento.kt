@@ -7,8 +7,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.stepbystep.adapters.AdapterGaleria
 import com.example.stepbystep.data.dao.AppDatabase
-import com.example.stepbystep.data.dao.FotoReceita
 import com.example.stepbystep.data.dao.ReceitaDAO
+import com.example.stepbystep.data.entities.Receita
 import com.example.stepbystep.databinding.GaleriaFragmentBinding
 
 class GaleriaFragmento : Fragment() {
@@ -17,7 +17,7 @@ class GaleriaFragmento : Fragment() {
     private val binding get() = _binding!!
 
     private val db: ReceitaDAO by lazy { AppDatabase.getInstance(requireContext()).receitaDAO() }
-    private val fotosReceitas: MutableList<FotoReceita> by lazy { db.buscarTodasFotos() }
+    private val receitas: MutableList<Receita> by lazy { db.buscarTodasReceitas() }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,7 +35,7 @@ class GaleriaFragmento : Fragment() {
     private fun inicializarRecyclerView() {
 
         binding.rvGaleriaReceitas.apply {
-            val adapterGaleria = AdapterGaleria(fotosReceitas)
+            val adapterGaleria = AdapterGaleria(receitas)
             adapter = adapterGaleria.also {
                 it.notifyDataSetChanged()
             }

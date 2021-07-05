@@ -32,10 +32,12 @@ class HomeFragmento : Fragment() {
             }
             botaoProcurarIngrediente.setOnClickListener {
                 Snackbar.make(binding.root, "Ainda não implementado", Snackbar.LENGTH_LONG).show()
+                findNavController().navigate(R.id.nav_listaIngredientes)
                 //TODO (Implementar tudo isso)
             }
             botaoProcurarTempo.setOnClickListener {
                 Snackbar.make(binding.root, "Ainda não implementado", Snackbar.LENGTH_LONG).show()
+                findNavController().navigate(R.id.nav_listaPassos)
                 //TODO (Implementar tudo isso)
             }
         }

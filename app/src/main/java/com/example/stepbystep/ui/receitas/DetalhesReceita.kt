@@ -32,6 +32,7 @@ class DetalhesReceita : Fragment() {
 
     private val args: DetalhesReceitaArgs by navArgs()
     private var uriFoto: Uri? = null
+    private lateinit var receita: Receita
 
     private val tirarFotoPrato =
         registerForActivityResult(ActivityResultContracts.TakePicture()) { ok ->
@@ -72,10 +73,12 @@ class DetalhesReceita : Fragment() {
 
         _binding = DetalhesFragmentBinding.inflate(inflater, container, false)
 
-        val codigoReceita = args.codigoReceita
+        var codigoReceita = args.codigoReceita
 
-        val receita: Receita? = if (codigoReceita == "null") {
-            null
+        receita = if (codigoReceita == -1L) {
+            Receita().also {
+                codigoReceita = it.codigo
+            }
         } else {
             db.buscarReceitaPorCodigo(codigoReceita)
         }
@@ -88,20 +91,20 @@ class DetalhesReceita : Fragment() {
             }
 
             botaoIngredientesRC.setOnClickListener {
-                val acao = DetalhesReceitaDirections
+                val acaoIngredientes = DetalhesReceitaDirections
                     .actionNavNovaReceitaToNavListaIngredientes(codigoReceita)
-                findNavController().navigate(acao)
+                findNavController().navigate(acaoIngredientes)
             }
 
             botaoPassosRC.setOnClickListener {
-                val acao = DetalhesReceitaDirections
+                val acaoPassos = DetalhesReceitaDirections
                     .actionNavNovaReceitaToPassosFragmento(codigoReceita)
-                findNavController().navigate(acao)
+                findNavController().navigate(acaoPassos)
             }
 
         }
 
-        if (receita != null) {
+        if (args.codigoReceita != -1L) {
 
             // Atualizar os campos de dados se a receita não for null
             with(binding) {
@@ -125,22 +128,30 @@ class DetalhesReceita : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
         R.id.action_save -> {
-            Snackbar.make(binding.root, "Salvar Receita Nova", Snackbar.LENGTH_SHORT)
+            salvarReceita()
             true
         }
         R.id.action_delete -> {
-            Snackbar.make(binding.root, "Deletar Receita Nova", Snackbar.LENGTH_SHORT)
+            deletarReceita()
             true
         }
         else -> super.onOptionsItemSelected(item)
     }
 
     fun salvarReceita() {
-        Snackbar.make(binding.root, "Salvar receita", Snackbar.LENGTH_LONG).show()
+        with (binding) {
+            receita.nome = entradaNome.text.toString()
+            receita.uriFoto = uriFoto.toString()
+            receita.tempoPreparoMilis = entradaTempoPreparo.text.toString().toLong()
+            receita.tempoCozimentoMilis = entradaTempoCozimento.text.toString().toLong()
+        }
+        db.inserirReceita(receita)
+        Snackbar.make(binding.root,"Receita Salva!", Snackbar.LENGTH_LONG).show()
     }
 
     fun deletarReceita() {
-        Snackbar.make(binding.root, "Deletar receita", Snackbar.LENGTH_LONG).show()
+        db.deletarReceita(receita)
+        Snackbar.make(binding.root,"Receita Deletada!", Snackbar.LENGTH_LONG).show()
     }
 
     private fun mostrarMenu(view: View) {

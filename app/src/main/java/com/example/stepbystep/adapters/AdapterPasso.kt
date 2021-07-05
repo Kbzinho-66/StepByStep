@@ -10,8 +10,6 @@ import com.example.stepbystep.R
 import com.example.stepbystep.data.dao.AppDatabase
 import com.example.stepbystep.data.dao.PassoDAO
 import com.example.stepbystep.data.entities.Passo
-import com.example.stepbystep.data.entities.PassoCronometrado
-import com.example.stepbystep.data.entities.PassoNormal
 import com.example.stepbystep.databinding.ReceitasPassoCronometradoBinding as CronometradoBinding
 import com.example.stepbystep.databinding.ReceitasPassoItemBinding as NormalBinding
 
@@ -34,27 +32,26 @@ class AdapterPasso(
 
         fun setPasso(passo: Passo) {
 
-            when (passo) {
+            if  (passo.cronometrado) {
 
-                is PassoNormal -> {
-                    with(layoutBinding as NormalBinding) {
-                        passoCheckbox.isChecked = passo.pronto
-                        (passoDescricao as TextView).text = passo.descricao
-                        passoBotaoDeletar.setOnClickListener {
-                            db.deletarPasso(passo.idPasso)
-                        }
+                with(layoutBinding as NormalBinding) {
+                    passoCheckbox.isChecked = passo.pronto
+                    (passoDescricao as TextView).text = passo.descricao
+                    passoBotaoDeletar.setOnClickListener {
+                        db.deletarPasso(passo)
                     }
                 }
-                is PassoCronometrado -> {
-                    with(layoutBinding as CronometradoBinding) {
-                        (passoDescricao as TextView).text = passo.descricao
-                        passoBotaoDeletar.setOnClickListener {
-                            db.deletarPasso(passo.idPasso)
-                        }
-                        passoProgresso.max = (passo.duracao / 1000).toInt()
-                        passoIniciarTimer.setOnClickListener {
-                            TODO("Implementar o timer")
-                        }
+
+            } else {
+
+                with(layoutBinding as CronometradoBinding) {
+                    (passoDescricao as TextView).text = passo.descricao
+                    passoBotaoDeletar.setOnClickListener {
+                        db.deletarPasso(passo)
+                    }
+                    passoProgresso.max = (passo.duracao / 1000).toInt()
+                    passoIniciarTimer.setOnClickListener {
+                        TODO("Implementar o timer")
                     }
                 }
             }

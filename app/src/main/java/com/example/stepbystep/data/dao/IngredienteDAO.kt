@@ -12,11 +12,11 @@ interface IngredienteDAO {
 
     @Transaction
     @Query("SELECT * FROM ingredientes WHERE id_receita = :cod")
-    fun buscarIngredientesReceita(cod: String): MutableList<Ingrediente>
+    fun buscarIngredientesReceita(cod: Long): MutableList<Ingrediente>
 
     @Update
     fun atualizarIngredientes(ingredientes: MutableList<Ingrediente>)
 
     @Delete
-    fun deletarIngrediente(cod: Long)
+    fun deletarIngrediente(ingrediente: Ingrediente)
 }

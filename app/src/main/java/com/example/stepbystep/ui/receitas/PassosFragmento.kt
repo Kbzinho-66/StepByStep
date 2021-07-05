@@ -15,18 +15,19 @@ import com.example.stepbystep.data.dao.PassoDAO
 import com.example.stepbystep.data.entities.Passo
 import com.example.stepbystep.databinding.ReceitasFragmentRvPassosBinding
 import com.google.android.material.snackbar.Snackbar
+import kotlin.properties.Delegates
 
 class PassosFragmento : Fragment() {
 
     private var _binding: ReceitasFragmentRvPassosBinding? = null
     private val binding get() = _binding!!
 
+    private val args: PassosFragmentoArgs by navArgs()
+    private var codigoReceita: Long by Delegates.notNull()
+
     private val db: PassoDAO by lazy {
         AppDatabase.getInstance(requireContext()).passoDAO()
     }
-
-    private val args: PassosFragmentoArgs by navArgs()
-    private var codigoReceita: String = args.codigoReceita
     private val listaPassos: MutableList<Passo> by lazy {
         db.buscarPassosReceita(codigoReceita)
     }
@@ -37,8 +38,9 @@ class PassosFragmento : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
-
         _binding = ReceitasFragmentRvPassosBinding.inflate(inflater, container, false)
+
+        codigoReceita = args.codigoReceita
 
         inicializarRecyclerView()
 

@@ -4,6 +4,8 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.example.stepbystep.data.entities.Ingrediente
+import com.example.stepbystep.data.entities.Passo
 import com.example.stepbystep.data.entities.Receita
 
 /**
@@ -11,7 +13,11 @@ import com.example.stepbystep.data.entities.Receita
  * Contém uma referência para o ReceitaDAO que será usado ao longo do aplicativo.
  */
 
-@Database(entities = [Receita::class], version = 1, exportSchema = false)
+@Database(
+    entities = [Receita::class, Ingrediente::class, Passo::class],
+    version = 2,
+    exportSchema = false
+)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun receitaDAO(): ReceitaDAO
@@ -23,7 +29,11 @@ abstract class AppDatabase : RoomDatabase() {
     companion object : SingletonHolder<AppDatabase, Context>({
         Room.databaseBuilder(
             it.applicationContext, AppDatabase::class.java, "receitas.db"
-        ).build()
+        ).run{
+            fallbackToDestructiveMigration()
+            allowMainThreadQueries() // TODO (Refatorar pra usar coroutines)
+            build()
+        }
     })
 }
 

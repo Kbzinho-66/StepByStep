@@ -33,7 +33,7 @@ class AdapterIngrediente(
                 (ingredienteNome as TextView).text = ingrediente.nome
                 (ingredienteQuantidade as TextView).text = ingrediente.quantidade
                 ingredienteBotaoDeletar.setOnClickListener {
-                    db.deletarIngrediente(ingrediente.idIngrediente)
+                    db.deletarIngrediente(ingrediente)
                 }
             }
         }

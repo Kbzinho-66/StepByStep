@@ -35,8 +35,8 @@
         tools:layout="@layout/detalhes_fragment">
         <argument
             android:name="codigoReceita"
-            android:defaultValue="null"
-            app:argType="string" />
+            android:defaultValue="-1L"
+            app:argType="long" />
         <action
             android:id="@+id/action_nav_novaReceita_to_nav_listaIngredientes"
             app:destination="@id/nav_listaIngredientes" />
@@ -52,8 +52,8 @@
         tools:layout="@layout/receitas_fragment_rv_ingredientes">
         <argument
             android:name="codigoReceita"
-            android:defaultValue="null"
-            app:argType="string" />
+            android:defaultValue="-1L"
+            app:argType="long" />
     </fragment>
 
     <fragment
@@ -62,8 +62,8 @@
         android:label="PassosFragmento">
         <argument
             android:name="codigoReceita"
-            android:defaultValue="null"
-            app:argType="string" />
+            android:defaultValue="-1L"
+            app:argType="long" />
     </fragment>
 
 </navigation>

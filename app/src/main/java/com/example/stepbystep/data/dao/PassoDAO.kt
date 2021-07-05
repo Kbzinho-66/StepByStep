@@ -12,11 +12,11 @@ interface PassoDAO {
 
     @Transaction
     @Query("SELECT * FROM passos WHERE id_receita = :cod")
-    fun buscarPassosReceita(cod: String): MutableList<Passo>
+    fun buscarPassosReceita(cod: Long): MutableList<Passo>
 
     @Update
     fun atualizarPassos(passos: MutableList<Passo>)
 
     @Delete
-    fun deletarPasso(cod: Long)
+    fun deletarPasso(passo: Passo)
 }

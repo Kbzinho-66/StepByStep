@@ -1,7 +1,6 @@
 package com.example.stepbystep.data.entities
 
 import androidx.room.*
-import com.example.stepbystep.data.Conversores
 import kotlinx.serialization.Serializable
 
 /**
@@ -12,11 +11,13 @@ import kotlinx.serialization.Serializable
 @Entity(tableName = "receitas")
 
 data class Receita(
-    @PrimaryKey @ColumnInfo(name = "id") val codigo: String,
-    val nome: String,
-    val uriFoto: String = "",
-    val tempoPreparoMilis: Long,
-    val tempoCozimentoMilis: Long,
-    val tempoTotalMilis: Long = tempoPreparoMilis + tempoCozimentoMilis,
-    val porcoes: Int,
-)
+    var nome: String = "",
+    var uriFoto: String = "",
+    var tempoPreparoMilis: Long = 0,
+    var tempoCozimentoMilis: Long = 0,
+    var tempoTotalMilis: Long = tempoPreparoMilis + tempoCozimentoMilis,
+    var porcoes: Int = 0,
+) {
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "id") var codigo: Long = 0
+}
