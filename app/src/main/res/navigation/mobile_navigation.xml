@@ -24,31 +24,34 @@
         android:label="@string/menu_gallery"
         tools:layout="@layout/galeria_fragment">
         <action
-            android:id="@+id/action_nav_livroReceitas_to_nav_detalhesReceita"
+            android:id="@+id/action_nav_ver_detalhes_receita"
             app:destination="@id/nav_detalhesReceita" />
     </fragment>
 
     <fragment
         android:id="@+id/nav_detalhesReceita"
         android:name="com.example.stepbystep.ui.receitas.DetalhesReceita"
-        android:label="Criação de Receita"
+        android:label="@string/recipe_creator"
         tools:layout="@layout/detalhes_fragment">
         <argument
             android:name="codigoReceita"
             android:defaultValue="-1L"
             app:argType="long" />
         <action
-            android:id="@+id/action_nav_novaReceita_to_nav_listaIngredientes"
+            android:id="@+id/action_nav_ver_lista_ingredientes"
             app:destination="@id/nav_listaIngredientes" />
         <action
-            android:id="@+id/action_nav_novaReceita_to_passosFragmento"
+            android:id="@+id/action_nav_ver_lista_passos"
             app:destination="@id/nav_listaPassos" />
+        <action
+            android:id="@+id/action_nav_detalhes_receita_to_nav_home"
+            app:destination="@id/nav_telaInicial" />
     </fragment>
 
     <fragment
         android:id="@+id/nav_listaIngredientes"
         android:name="com.example.stepbystep.ui.receitas.IngredientesFragmento"
-        android:label="Lista de Ingredientes"
+        android:label="@string/ingredients_list"
         tools:layout="@layout/receitas_fragment_rv_ingredientes">
         <argument
             android:name="codigoReceita"
@@ -59,7 +62,7 @@
     <fragment
         android:id="@+id/nav_listaPassos"
         android:name="com.example.stepbystep.ui.receitas.PassosFragmento"
-        android:label="PassosFragmento">
+        android:label="@string/steps_list">
         <argument
             android:name="codigoReceita"
             android:defaultValue="-1L"

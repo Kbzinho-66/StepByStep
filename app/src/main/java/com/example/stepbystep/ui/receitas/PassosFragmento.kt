@@ -1,10 +1,7 @@
 package com.example.stepbystep.ui.receitas
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.MenuItem
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -39,20 +36,13 @@ class PassosFragmento : Fragment() {
     ): View {
 
         _binding = ReceitasFragmentRvPassosBinding.inflate(inflater, container, false)
+        setHasOptionsMenu(true)
 
         codigoReceita = args.codigoReceita
 
         inicializarRecyclerView()
 
         return binding.root
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
-        R.id.action_save -> {
-            Snackbar.make(binding.root, "Salvar Passos", Snackbar.LENGTH_SHORT)
-            true
-        }
-        else -> super.onOptionsItemSelected(item)
     }
 
     private fun inicializarRecyclerView() {
@@ -73,5 +63,23 @@ class PassosFragmento : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, menuInflater: MenuInflater) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        menuInflater.inflate(R.menu.menu_listas, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
+        R.id.action_save -> {
+            salvarPassos()
+            true
+        }
+        else -> super.onOptionsItemSelected(item)
+    }
+
+    private fun salvarPassos() {
+        Snackbar.make(binding.root, "Passos salvos", Snackbar.LENGTH_LONG).show()
+        // TODO (Salvar todos os passos)
     }
 }

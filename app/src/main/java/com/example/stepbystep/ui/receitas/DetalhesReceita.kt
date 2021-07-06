@@ -2,17 +2,16 @@ package com.example.stepbystep.ui.receitas
 
 import android.net.Uri
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.MenuItem
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.PopupMenu
 import android.widget.TextView
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
+import com.example.stepbystep.MainActivity
 import com.example.stepbystep.R
 import com.example.stepbystep.Utilidades
 import com.example.stepbystep.data.dao.AppDatabase
@@ -72,6 +71,7 @@ class DetalhesReceita : Fragment() {
     ): View {
 
         _binding = DetalhesFragmentBinding.inflate(inflater, container, false)
+        setHasOptionsMenu(true)
 
         var codigoReceita = args.codigoReceita
 
@@ -92,13 +92,13 @@ class DetalhesReceita : Fragment() {
 
             botaoIngredientesRC.setOnClickListener {
                 val acaoIngredientes = DetalhesReceitaDirections
-                    .actionNavNovaReceitaToNavListaIngredientes(codigoReceita)
+                    .actionNavVerListaIngredientes(codigoReceita)
                 findNavController().navigate(acaoIngredientes)
             }
 
             botaoPassosRC.setOnClickListener {
                 val acaoPassos = DetalhesReceitaDirections
-                    .actionNavNovaReceitaToPassosFragmento(codigoReceita)
+                    .actionNavVerListaPassos(codigoReceita)
                 findNavController().navigate(acaoPassos)
             }
 
@@ -109,21 +109,39 @@ class DetalhesReceita : Fragment() {
             // Atualizar os campos de dados se a receita não for null
             with(binding) {
 
-                Glide.with(this@DetalhesReceita).load(receita.uriFoto).into(fotoRC)
                 (entradaNome as TextView).text = receita.nome
+
+                Glide.with(this@DetalhesReceita).load(receita.uriFoto).into(fotoRC)
+                fotoRC.foreground = null
+
                 (entradaTempoPreparo as TextView).text =
                     Utilidades.millisToString(receita.tempoPreparoMilis)
                 (entradaTempoCozimento as TextView).text =
                     Utilidades.millisToString(receita.tempoCozimentoMilis)
+                (entradaPorcoes as TextView).text = receita.porcoes.toString()
             }
         }
 
         return binding.root
     }
 
+    override fun onResume() {
+        uriFoto?.let {
+            binding.fotoRC.foreground = null
+            Glide.with(this@DetalhesReceita).load(it).into(binding.fotoRC)
+        }
+
+        super.onResume()
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, menuInflater: MenuInflater) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        menuInflater.inflate(R.menu.criador, menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
@@ -138,20 +156,29 @@ class DetalhesReceita : Fragment() {
         else -> super.onOptionsItemSelected(item)
     }
 
-    fun salvarReceita() {
+    private fun salvarReceita() {
         with (binding) {
             receita.nome = entradaNome.text.toString()
             receita.uriFoto = uriFoto.toString()
-            receita.tempoPreparoMilis = entradaTempoPreparo.text.toString().toLong()
-            receita.tempoCozimentoMilis = entradaTempoCozimento.text.toString().toLong()
+
+            receita.tempoPreparoMilis =
+                if (entradaTempoPreparo.text?.isNotEmpty() == true)
+                    Utilidades.stringToMillis(entradaTempoPreparo.toString())
+                else 0L
+
+            receita.tempoCozimentoMilis =
+                if (entradaTempoCozimento.text?.isNotEmpty() == true)
+                    Utilidades.stringToMillis(entradaTempoCozimento.toString())
+                else 0L
         }
         db.inserirReceita(receita)
         Snackbar.make(binding.root,"Receita Salva!", Snackbar.LENGTH_LONG).show()
     }
 
-    fun deletarReceita() {
+    private fun deletarReceita() {
         db.deletarReceita(receita)
         Snackbar.make(binding.root,"Receita Deletada!", Snackbar.LENGTH_LONG).show()
+        findNavController().navigate(R.id.action_nav_detalhes_receita_to_nav_home)
     }
 
     private fun mostrarMenu(view: View) {

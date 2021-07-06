@@ -21,4 +21,7 @@
     <string name="take_pic">Tirar uma foto nova</string>
     <string name="pick_from_gallery">Escolher uma foto da galeria</string>
     <string name="step_description">Descreva o passo</string>
+    <string name="recipe_creator">Criação de Receita</string>
+    <string name="ingredients_list">Lista de Ingredientes</string>
+    <string name="steps_list">Lista de Passos</string>
 </resources>

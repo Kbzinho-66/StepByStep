@@ -1,8 +1,8 @@
 package com.example.stepbystep.data.entities
 
-import androidx.room.Embedded
-import androidx.room.Entity
-import androidx.room.Relation
+//import androidx.room.Embedded
+//import androidx.room.Entity
+//import androidx.room.Relation
 
 /**
  * Classe que representa uma receita completa.

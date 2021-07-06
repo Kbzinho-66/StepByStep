@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.navigation.Navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.example.stepbystep.data.entities.Receita
 import com.example.stepbystep.databinding.GaleriaItemBinding
 import com.example.stepbystep.ui.galeria.GaleriaFragmentoDirections
@@ -24,10 +25,15 @@ class AdapterGaleria(
         fun setFoto(receita: Receita) {
 
             with(layoutBinding) {
-                Glide.with(this.root).load(receita.uriFoto).into(fotoComidaGaleria)
+                Glide
+                    .with(this.root)
+                    .load(receita.uriFoto)
+//                    .apply(RequestOptions()
+//                        .override(fotoComidaGaleria.width,fotoComidaGaleria.height))
+                    .into(fotoComidaGaleria)
                 fotoComidaGaleria.setOnClickListener {
                     val acao = GaleriaFragmentoDirections
-                        .actionNavLivroReceitasToNavDetalhesReceita(receita.codigo)
+                        .actionNavVerDetalhesReceita(receita.codigo)
                     findNavController(this.root).navigate(acao)
                 }
             }

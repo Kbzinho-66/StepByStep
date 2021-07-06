@@ -49,16 +49,13 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-    private lateinit var fragmentoAtual: NavDestination
-
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
         // Inicializar o Singleton com o contexto da aplicação
-        val receitaDao = AppDatabase.getInstance(applicationContext).receitaDAO()
-
+        AppDatabase.getInstance(applicationContext).receitaDAO()
 
         if (!pediuPermissao) {
             pedirPermissao.launch(Manifest.permission.CAMERA)
@@ -84,60 +81,12 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        menuInflater.inflate(R.menu.main, menu)
-
-        navController.addOnDestinationChangedListener { _, destination, _ ->
-            fragmentoAtual = destination
-            menu.clear()
-            when (destination.id) {
-
-                R.id.nav_detalhesReceita -> {
-                    menuInflater.inflate(R.menu.criador, menu)
-                }
-
-                R.id.nav_listaIngredientes, R.id.nav_listaPassos -> {
-                    menuInflater.inflate(R.menu.menu_listas, menu)
-                }
-
-                else -> {
-                    menuInflater.inflate(R.menu.main, menu)
-                }
-            }
-        }
-
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
-
-        R.id.action_save -> {
-            true
-        }
-
-        R.id.action_delete -> {
-            true
-        }
-
-        else -> super.onOptionsItemSelected(item)
-    }
-
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment_content_main)
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
 
     private fun mostraAlerta(permissao: String, nome: String) {
-        /**
-         * Mostrar um alerta quando uma permissão é negada, além de avisar
-         * sobre a necessidade da permissão e gerar o prompt para pedir de novo.
-         *
-         * @param permissao A permissao que foi negada, de forma a lançar a requisição de novo
-         * com esse parâmetro
-         *
-         * @param nome O nome que será usado para identificar a permissão na mensagem do alerta.
-         */
 
         AlertDialog.Builder(this)
             .apply {

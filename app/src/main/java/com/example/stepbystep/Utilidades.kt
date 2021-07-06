@@ -13,6 +13,12 @@ class Utilidades {
 
     companion object {
 
+        fun stringToMillis(string: String): Long {
+            //TODO (Implementar isso, ou refatorar pra Duration)
+            return 0L
+        }
+
+
         fun millisToString(millis: Long) =
             String.format(
                 "%02d:%02d:%02d",
