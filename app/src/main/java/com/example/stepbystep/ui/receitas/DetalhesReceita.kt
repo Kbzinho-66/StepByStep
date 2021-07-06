@@ -6,12 +6,10 @@ import android.view.*
 import android.widget.PopupMenu
 import android.widget.TextView
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
-import com.example.stepbystep.MainActivity
 import com.example.stepbystep.R
 import com.example.stepbystep.Utilidades
 import com.example.stepbystep.data.dao.AppDatabase
