@@ -10,13 +10,16 @@ import com.example.stepbystep.data.entities.Receita
 
 /**
  * Classe responsável pelo acesso ao banco de dados usando Room.
- * Contém uma referência para o ReceitaDAO que será usado ao longo do aplicativo.
+ * Contém uma referência o DAO responsável por cada classe de modelo
+ * que será usada ao longo do aplicativo.
+ *
+ * Precisa ser inicializada com o contexto da aplicação na MainActivity!
  */
 
 @Database(
     entities = [Receita::class, Ingrediente::class, Passo::class],
-    version = 2,
-    exportSchema = false
+    version = 4,
+    exportSchema = true
 )
 abstract class AppDatabase : RoomDatabase() {
 
@@ -29,9 +32,9 @@ abstract class AppDatabase : RoomDatabase() {
     companion object : SingletonHolder<AppDatabase, Context>({
         Room.databaseBuilder(
             it.applicationContext, AppDatabase::class.java, "receitas.db"
-        ).run{
+        ).run {
             fallbackToDestructiveMigration()
-            allowMainThreadQueries() // TODO (Refatorar pra usar coroutines)
+            allowMainThreadQueries() // TODO (Refatorar pra usar coroutines/Flow)
             build()
         }
     })

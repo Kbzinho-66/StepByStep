@@ -5,11 +5,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.stepbystep.adapters.AdapterGaleria
 import com.example.stepbystep.data.dao.AppDatabase
 import com.example.stepbystep.data.dao.ReceitaDAO
 import com.example.stepbystep.data.entities.Receita
 import com.example.stepbystep.databinding.GaleriaFragmentBinding
+
+/**
+ * Fragmento responsável por gerir o Livro de Receitas, a grade com a
+ * foto de cada [Receita]
+ */
 
 class GaleriaFragmento : Fragment() {
 
@@ -18,6 +22,8 @@ class GaleriaFragmento : Fragment() {
 
     private val db: ReceitaDAO by lazy { AppDatabase.getInstance(requireContext()).receitaDAO() }
     private val receitas: MutableList<Receita> by lazy { db.buscarTodasReceitas() }
+
+    private val adapterGaleria: AdapterGaleria by lazy { AdapterGaleria(receitas) }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -34,11 +40,8 @@ class GaleriaFragmento : Fragment() {
 
     private fun inicializarRecyclerView() {
 
-        binding.rvGaleriaReceitas.apply {
-            val adapterGaleria = AdapterGaleria(receitas)
-            adapter = adapterGaleria.also {
+        binding.rvGaleriaReceitas.adapter = adapterGaleria.also{
                 it.notifyDataSetChanged()
-            }
         }
     }
 

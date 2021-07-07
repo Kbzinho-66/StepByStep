@@ -1,9 +1,8 @@
-package com.example.stepbystep.adapters
+package com.example.stepbystep.ui.receitas
 
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.stepbystep.data.dao.AppDatabase
 import com.example.stepbystep.data.dao.IngredienteDAO
@@ -13,6 +12,8 @@ import com.example.stepbystep.databinding.ReceitasIngredienteItemBinding as Ingr
 /**
  * Classe que adapta um [Ingrediente] para
  * a RecyclerView em [com.example.stepbystep.ui.receitas.IngredientesFragmento].
+ *
+ * @param ingredientes A lista dos ingredientes a serem adaptados
  */
 
 class AdapterIngrediente(
@@ -29,33 +30,22 @@ class AdapterIngrediente(
 
         fun setIngrediente(ingrediente: Ingrediente) {
             with(layoutBinding) {
-                ingredienteCheckbox.isChecked = false
-                (ingredienteNome as TextView).text = ingrediente.nome
-                (ingredienteQuantidade as TextView).text = ingrediente.quantidade
+                this.itemIngrediente = ingrediente
+
                 ingredienteBotaoDeletar.setOnClickListener {
-                    db.deletarIngrediente(ingrediente)
+                    db.deletarIngrediente(ingrediente) //FIXME(Não funciona por algum motivo)
                 }
             }
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int):
-            AdapterIngrediente.IngredienteHolder {
-
-        val layoutBinding = IngredienteBinding.inflate(
-            LayoutInflater.from(parent.context),
-            parent,
-            false
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): IngredienteHolder =
+        IngredienteHolder(IngredienteBinding.inflate(LayoutInflater.from(parent.context),
+            parent,false)
         )
 
-        return IngredienteHolder(layoutBinding)
-    }
-
-    override fun onBindViewHolder(holder: AdapterIngrediente.IngredienteHolder, position: Int) {
-
-        val ingrediente = ingredientes[position]
-
-        holder.setIngrediente(ingrediente)
+    override fun onBindViewHolder(holder: IngredienteHolder, position: Int) {
+        holder.setIngrediente(ingredientes[position])
     }
 
     override fun getItemCount(): Int = ingredientes.size

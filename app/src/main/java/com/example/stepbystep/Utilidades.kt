@@ -9,6 +9,10 @@ import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.concurrent.TimeUnit
 
+/**
+ * Objeto com funções aleatórias que são ou podem ser úteis.
+ */
+
 class Utilidades {
 
     companion object {

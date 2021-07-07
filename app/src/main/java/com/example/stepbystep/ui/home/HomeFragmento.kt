@@ -10,6 +10,10 @@ import com.example.stepbystep.R
 import com.example.stepbystep.databinding.HomeFragmentBinding
 import com.google.android.material.snackbar.Snackbar
 
+/**
+ * Fragmento responsável por gerir a tela inicial do aplicativo.
+ */
+
 class HomeFragmento : Fragment() {
 
     private var _binding: HomeFragmentBinding? = null

@@ -18,9 +18,11 @@ interface ReceitaDAO {
     @Query("SELECT * FROM receitas WHERE id = :cod LIMIT 1")
     fun buscarReceitaPorCodigo(cod: Long): Receita
 
-    // Métodos de conveniência
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun inserirReceita(receita: Receita): Long
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun inserirReceitas(receitas: MutableList<Receita>)
 
     @Delete
     fun deletarReceita(receita: Receita)

@@ -3,16 +3,19 @@ package com.example.stepbystep.ui.receitas
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.stepbystep.R
-import com.example.stepbystep.adapters.AdapterPasso
 import com.example.stepbystep.data.dao.AppDatabase
 import com.example.stepbystep.data.dao.PassoDAO
 import com.example.stepbystep.data.entities.Passo
 import com.example.stepbystep.databinding.ReceitasFragmentRvPassosBinding
-import com.google.android.material.snackbar.Snackbar
-import kotlin.properties.Delegates
+
+/**
+ * Fragmento responsável por gerir a RecyclerView de [Passo] associada
+ * a cada receita.
+ */
 
 class PassosFragmento : Fragment() {
 
@@ -20,13 +23,17 @@ class PassosFragmento : Fragment() {
     private val binding get() = _binding!!
 
     private val args: PassosFragmentoArgs by navArgs()
-    private var codigoReceita: Long by Delegates.notNull()
+    private var codigoReceita: Long = 0
 
     private val db: PassoDAO by lazy {
         AppDatabase.getInstance(requireContext()).passoDAO()
     }
     private val listaPassos: MutableList<Passo> by lazy {
         db.buscarPassosReceita(codigoReceita)
+    }
+
+    private val adapterPasso: AdapterPasso by lazy {
+        AdapterPasso(listaPassos, requireContext())
     }
 
     override fun onCreateView(
@@ -42,22 +49,29 @@ class PassosFragmento : Fragment() {
 
         inicializarRecyclerView()
 
+        binding.botaoNovoPasso.setOnClickListener {
+            listaPassos.add(Passo(idReceita = codigoReceita))
+            adapterPasso.notifyItemInserted(listaPassos.size - 1)
+        }
+
         return binding.root
     }
 
     private fun inicializarRecyclerView() {
 
-        val layoutManager = LinearLayoutManager(activity).also {
-            it.orientation = LinearLayoutManager.VERTICAL
-        }
-
         binding.rvListaPassos.apply {
+
+            val layoutManager = LinearLayoutManager(requireContext()).also {
+                it.orientation = LinearLayoutManager.VERTICAL
+            }
             setLayoutManager(layoutManager)
-            val adapterPasso = AdapterPasso(listaPassos, context)
+
             adapter = adapterPasso.also {
                 it.notifyDataSetChanged()
             }
         }
+
+
     }
 
     override fun onDestroyView() {
@@ -66,7 +80,6 @@ class PassosFragmento : Fragment() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu, menuInflater: MenuInflater) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.menu_listas, menu)
     }
 
@@ -79,7 +92,7 @@ class PassosFragmento : Fragment() {
     }
 
     private fun salvarPassos() {
-        Snackbar.make(binding.root, "Passos salvos", Snackbar.LENGTH_LONG).show()
-        // TODO (Salvar todos os passos)
+        db.inserirPassos(listaPassos)
+        findNavController().navigateUp()
     }
 }

@@ -1,54 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="100dp"
-    android:background="@color/desert_sand">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <CheckBox
-        android:id="@+id/passo_checkbox"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="5dp"
-        app:layout_constraintBottom_toTopOf="@+id/passo_botao_deletar"
-        app:layout_constraintEnd_toStartOf="@+id/passo_descricao_layout"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <data>
+        <import type="com.example.stepbystep.data.entities.Passo"/>
+        <variable
+            name="passoItem"
+            type="Passo" />
+    </data>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/passo_descricao_layout"
-        android:layout_width="350dp"
-        android:layout_height="match_parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/passo_checkbox"
-        app:layout_constraintTop_toTopOf="parent">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginTop="1dp"
+        android:background="@color/desert_sand">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/passo_descricao"
-            android:layout_width="match_parent"
+        <CheckBox
+            android:id="@+id/passo_checkbox"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="5dp"
+            app:layout_constraintBottom_toTopOf="@+id/passo_botao_deletar"
+            app:layout_constraintEnd_toStartOf="@+id/passo_descricao_layout"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:checked="@={passoItem.pronto}"/>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/passo_descricao_layout"
+            android:layout_width="350dp"
             android:layout_height="match_parent"
-            android:backgroundTint="@color/desert_sand"
-            android:fontFamily="casual"
-            android:hint="@string/step_description"
-            android:inputType="textMultiLine"
-            android:textColor="@color/smoky_black"
-            android:textSize="20sp" />
-    </com.google.android.material.textfield.TextInputLayout>
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/passo_checkbox"
+            app:layout_constraintTop_toTopOf="parent">
 
-    <ImageButton
-        android:id="@+id/passo_botao_deletar"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:background="@android:color/transparent"
-        android:foreground="@drawable/ic_delete"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/passo_descricao_layout"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/passo_checkbox"
-        tools:ignore="ContentDescription" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/passo_descricao"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:backgroundTint="@color/desert_sand"
+                android:fontFamily="casual"
+                android:hint="@string/step_description"
+                android:text="@={passoItem.descricao}"
+                android:inputType="textMultiLine|textNoSuggestions"
+                android:textColor="@color/smoky_black"
+                android:textSize="20sp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <ImageButton
+            android:id="@+id/passo_botao_deletar"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@android:color/transparent"
+            android:foreground="@drawable/ic_delete"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/passo_descricao_layout"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/passo_checkbox"
+            tools:ignore="ContentDescription" />
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

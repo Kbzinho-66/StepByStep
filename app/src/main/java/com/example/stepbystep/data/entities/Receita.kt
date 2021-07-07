@@ -4,7 +4,10 @@ import androidx.room.*
 import kotlinx.serialization.Serializable
 
 /**
- * Classe de modelo para uma receita.
+ * Classe de modelo que contém as características básicas de uma receita.
+ *
+ * Não se fez necessário até agora manter uma referência aos ingredientes
+ * e passos de execução.
  */
 
 @Serializable
@@ -13,9 +16,12 @@ import kotlinx.serialization.Serializable
 data class Receita(
     var nome: String = "",
     var uriFoto: String = "",
+
+    // TODO (Mudar isso pra um formato mais utilizável)
     var tempoPreparoMilis: Long = 0,
     var tempoCozimentoMilis: Long = 0,
     var tempoTotalMilis: Long = tempoPreparoMilis + tempoCozimentoMilis,
+
     var porcoes: Int = 0,
 ) {
     @PrimaryKey(autoGenerate = true)

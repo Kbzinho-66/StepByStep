@@ -18,19 +18,19 @@ import com.example.stepbystep.data.entities.Receita
 import com.example.stepbystep.databinding.DetalhesFragmentBinding
 import com.google.android.material.snackbar.Snackbar
 
+/**
+ * Fragmento que é chamada em dois momentos ligeiramente diferentes.
+ * Pode ser invocada para a criação de uma receita, se não for passado
+ * nenhum argumento em [DetalhesReceitaArgs]; ou pode ser invocada para
+ * mostrar os detalhes da receita cujo código é passado em [DetalhesReceitaArgs].
+ */
+
 class DetalhesReceita : Fragment() {
 
     private var _binding: DetalhesFragmentBinding? = null
     private val binding get() = _binding!!
 
-    private val db: ReceitaDAO by lazy {
-        AppDatabase.getInstance(requireContext()).receitaDAO()
-    }
-
-    private val args: DetalhesReceitaArgs by navArgs()
-    private var uriFoto: Uri? = null
-    private lateinit var receita: Receita
-
+    // Pedidos de atividade
     private val tirarFotoPrato =
         registerForActivityResult(ActivityResultContracts.TakePicture()) { ok ->
             if (ok) {
@@ -42,7 +42,9 @@ class DetalhesReceita : Fragment() {
 
                 binding.fotoRC.apply {
                     foreground = null
-                    rotation = 90F
+//                    rotation = 90F
+                    //FIXME (Quando a foto é tirada na hora, ela sempre fica virada)
+                    // Ou não... Se a foto for tirada com o celular "deitado" ela fica melhor
                 }
             }
         }
@@ -62,6 +64,16 @@ class DetalhesReceita : Fragment() {
 
         }
 
+    // Valores relacionados ao banco de dados
+    private val db: ReceitaDAO by lazy {
+        AppDatabase.getInstance(requireContext()).receitaDAO()
+    }
+    private val args: DetalhesReceitaArgs by navArgs()
+
+    // Variáveis temporárias
+    private var uriFoto: Uri? = null
+    private lateinit var receita: Receita
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -73,6 +85,7 @@ class DetalhesReceita : Fragment() {
 
         var codigoReceita = args.codigoReceita
 
+        // O valor default do codigoReceita é -1L, logo é criação de receita
         receita = if (codigoReceita == -1L) {
             Receita().also {
                 codigoReceita = it.codigo
@@ -138,7 +151,6 @@ class DetalhesReceita : Fragment() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu, menuInflater: MenuInflater) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.criador, menu)
     }
 

@@ -1,18 +1,18 @@
-package com.example.stepbystep.adapters
+package com.example.stepbystep.ui.galeria
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.navigation.Navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
 import com.example.stepbystep.data.entities.Receita
 import com.example.stepbystep.databinding.GaleriaItemBinding
-import com.example.stepbystep.ui.galeria.GaleriaFragmentoDirections
 
 /**
  * Classe que adapta uma [Receita] para
  * a RecyclerView em [com.example.stepbystep.ui.galeria.GaleriaFragmento].
+ *
+ * Não usa DataBinding por causa do Glide. TODO(Quem sabe mudar isso no futuro)
  */
 
 class AdapterGaleria(
@@ -28,8 +28,6 @@ class AdapterGaleria(
                 Glide
                     .with(this.root)
                     .load(receita.uriFoto)
-//                    .apply(RequestOptions()
-//                        .override(fotoComidaGaleria.width,fotoComidaGaleria.height))
                     .into(fotoComidaGaleria)
                 fotoComidaGaleria.setOnClickListener {
                     val acao = GaleriaFragmentoDirections
@@ -38,24 +36,16 @@ class AdapterGaleria(
                 }
             }
         }
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int):
-            AdapterGaleria.GaleriaHolder {
-
-        val layoutBinding = GaleriaItemBinding.inflate(
-            LayoutInflater.from(parent.context),
-            parent,
-            false
+        GaleriaHolder = GaleriaHolder(
+            GaleriaItemBinding.inflate(LayoutInflater.from(parent.context), parent,false)
         )
 
-        return GaleriaHolder(layoutBinding)
-    }
-
-    override fun onBindViewHolder(holder: AdapterGaleria.GaleriaHolder, position: Int) {
-
+    override fun onBindViewHolder(holder: GaleriaHolder, position: Int) {
         val foto = receitas[position]
-
         holder.setFoto(foto)
     }
 

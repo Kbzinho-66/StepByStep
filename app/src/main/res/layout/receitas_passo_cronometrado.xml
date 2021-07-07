@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="120dp"
-    android:background="@color/desert_sand">
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:background="@color/desert_sand">
 
     <ImageButton
         android:id="@+id/passo_iniciar_timer"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
         android:background="@android:color/transparent"
         android:foreground="@drawable/ic_timer"
         android:scaleType="fitCenter"
@@ -58,9 +59,9 @@
 
     <ImageButton
         android:id="@+id/passo_botao_deletar"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
-        android:layout_marginBottom="1dp"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginBottom="5dp"
         android:background="@android:color/transparent"
         android:foreground="@drawable/ic_delete"
         android:scaleType="fitCenter"
@@ -69,5 +70,88 @@
         app:layout_constraintStart_toStartOf="parent"
         tools:ignore="ContentDescription" />
 
-
 </androidx.constraintlayout.widget.ConstraintLayout>
+<!--<layout xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--    xmlns:tools="http://schemas.android.com/tools">-->
+
+<!--    <data>-->
+<!--        <import type="com.example.stepbystep.data.entities.Passo"/>-->
+<!--        <variable-->
+<!--            name="passoItem"-->
+<!--            type="Passo" />-->
+<!--    </data>-->
+
+<!--    <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="120dp"-->
+<!--        android:background="@color/desert_sand">-->
+
+<!--        <ImageButton-->
+<!--            android:id="@+id/passo_iniciar_timer"-->
+<!--            android:layout_width="35dp"-->
+<!--            android:layout_height="35dp"-->
+<!--            android:background="@android:color/transparent"-->
+<!--            android:foreground="@drawable/ic_timer"-->
+<!--            android:scaleType="fitCenter"-->
+<!--            app:layout_constraintBottom_toTopOf="@+id/passo_botao_deletar"-->
+<!--            app:layout_constraintEnd_toStartOf="@+id/textInputLayout"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent"-->
+<!--            tools:ignore="ContentDescription" />-->
+
+<!--        <com.google.android.material.textfield.TextInputLayout-->
+<!--            android:id="@+id/textInputLayout"-->
+<!--            android:layout_width="350dp"-->
+<!--            android:layout_height="100dp"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintHorizontal_bias="1.0"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent"-->
+<!--            app:layout_constraintVertical_bias="0">-->
+
+<!--            <com.google.android.material.textfield.TextInputEditText-->
+<!--                android:id="@+id/passo_descricao"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:backgroundTint="@color/desert_sand"-->
+<!--                android:fontFamily="casual"-->
+<!--                android:hint="@string/step_description"-->
+<!--                android:text="@={passoItem.descricao}"-->
+<!--                android:inputType="textMultiLine"-->
+<!--                android:textColor="@color/smoky_black"-->
+<!--                android:textSize="20sp" />-->
+<!--        </com.google.android.material.textfield.TextInputLayout>-->
+
+<!--        <ProgressBar-->
+<!--            android:id="@+id/passo_progresso"-->
+<!--            style="?android:attr/progressBarStyleHorizontal"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:progress="25"-->
+<!--            android:max="@{`` + passoItem.duracao}"-->
+<!--            android:progressBackgroundTint="@color/smoky_black"-->
+<!--            android:progressBackgroundTintMode="add"-->
+<!--            android:progressTint="@color/medium_carmine"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />-->
+
+<!--        <ImageButton-->
+<!--            android:id="@+id/passo_botao_deletar"-->
+<!--            android:layout_width="35dp"-->
+<!--            android:layout_height="35dp"-->
+<!--            android:layout_marginBottom="5dp"-->
+<!--            android:background="@android:color/transparent"-->
+<!--            android:foreground="@drawable/ic_delete"-->
+<!--            android:scaleType="fitCenter"-->
+<!--            app:layout_constraintBottom_toTopOf="@+id/passo_progresso"-->
+<!--            app:layout_constraintEnd_toStartOf="@+id/textInputLayout"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            tools:ignore="ContentDescription" />-->
+
+
+<!--    </androidx.constraintlayout.widget.ConstraintLayout>-->
+<!--</layout>-->

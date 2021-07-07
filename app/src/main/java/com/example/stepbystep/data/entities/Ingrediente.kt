@@ -21,12 +21,12 @@ import androidx.room.*
 data class Ingrediente(
 
     // A receita à qual esse ingrediente está vinculado
-    @ColumnInfo(name = "id_receita") val idReceita: String,
+    @ColumnInfo(name = "id_receita") val idReceita: Long,
 
-    @ColumnInfo(name = "nome_ingrediente") val nome: String,
+    @ColumnInfo(name = "nome_ingrediente") var nome: String = "",
 
-    // Quantidade do ingrediente, quem sabe deixar mais controlado um dia
-    @ColumnInfo(name = "quantidade_ingrediente") var quantidade: String,
+    // Quantidade do ingrediente TODO(Deixar mais controlado, com Enum talvez)
+    @ColumnInfo(name = "quantidade_ingrediente") var quantidade: String = "",
 
     ) {
     @PrimaryKey(autoGenerate = true)
@@ -34,6 +34,6 @@ data class Ingrediente(
     var idIngrediente: Long = 0
 
     // Um booleano para marcar se o usuário tem o ingrediente ou não
-    @Ignore var ok: Boolean = false
+    @ColumnInfo(name = "possui") var ok: Boolean = false
 }
 

@@ -62,7 +62,8 @@
     <fragment
         android:id="@+id/nav_listaPassos"
         android:name="com.example.stepbystep.ui.receitas.PassosFragmento"
-        android:label="@string/steps_list">
+        android:label="@string/steps_list"
+        tools:layout="@layout/receitas_fragment_rv_passos">
         <argument
             android:name="codigoReceita"
             android:defaultValue="-1L"

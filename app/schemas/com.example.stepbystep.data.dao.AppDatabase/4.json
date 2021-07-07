@@ -1,0 +1,212 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 4,
+    "identityHash": "f68cd9c56eebb37de904950242c1ab57",
+    "entities": [
+      {
+        "tableName": "receitas",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`nome` TEXT NOT NULL, `uriFoto` TEXT NOT NULL, `tempoPreparoMilis` INTEGER NOT NULL, `tempoCozimentoMilis` INTEGER NOT NULL, `tempoTotalMilis` INTEGER NOT NULL, `porcoes` INTEGER NOT NULL, `id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "nome",
+            "columnName": "nome",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "uriFoto",
+            "columnName": "uriFoto",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "tempoPreparoMilis",
+            "columnName": "tempoPreparoMilis",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "tempoCozimentoMilis",
+            "columnName": "tempoCozimentoMilis",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "tempoTotalMilis",
+            "columnName": "tempoTotalMilis",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "porcoes",
+            "columnName": "porcoes",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "codigo",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "ingredientes",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id_receita` INTEGER NOT NULL, `nome_ingrediente` TEXT NOT NULL, `quantidade_ingrediente` TEXT NOT NULL, `id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `possui` INTEGER NOT NULL, FOREIGN KEY(`id_receita`) REFERENCES `receitas`(`id`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
+        "fields": [
+          {
+            "fieldPath": "idReceita",
+            "columnName": "id_receita",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "nome",
+            "columnName": "nome_ingrediente",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "quantidade",
+            "columnName": "quantidade_ingrediente",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "idIngrediente",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "ok",
+            "columnName": "possui",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [
+          {
+            "name": "index_ingredientes_id_receita",
+            "unique": false,
+            "columnNames": [
+              "id_receita"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_ingredientes_id_receita` ON `${TABLE_NAME}` (`id_receita`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "receitas",
+            "onDelete": "NO ACTION",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "id_receita"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "passos",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id_receita` INTEGER NOT NULL, `descricao_passo` TEXT NOT NULL, `realizado` INTEGER NOT NULL, `ordem` INTEGER NOT NULL, `duracao` INTEGER NOT NULL, `cronometrado` INTEGER NOT NULL, `id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, FOREIGN KEY(`id_receita`) REFERENCES `receitas`(`id`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
+        "fields": [
+          {
+            "fieldPath": "idReceita",
+            "columnName": "id_receita",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "descricao",
+            "columnName": "descricao_passo",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "pronto",
+            "columnName": "realizado",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "ordem",
+            "columnName": "ordem",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "duracao",
+            "columnName": "duracao",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "cronometrado",
+            "columnName": "cronometrado",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "idPasso",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [
+          {
+            "name": "index_passos_id_receita",
+            "unique": false,
+            "columnNames": [
+              "id_receita"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_passos_id_receita` ON `${TABLE_NAME}` (`id_receita`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "receitas",
+            "onDelete": "NO ACTION",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "id_receita"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          }
+        ]
+      }
+    ],
+    "views": [],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'f68cd9c56eebb37de904950242c1ab57')"
+    ]
+  }
+}

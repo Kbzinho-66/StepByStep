@@ -11,12 +11,16 @@ import com.example.stepbystep.data.entities.Passo
 interface PassoDAO {
 
     @Transaction
-    @Query("SELECT * FROM passos WHERE id_receita = :cod")
+    @Query("SELECT * FROM passos WHERE id_receita = :cod ORDER BY ordem")
     fun buscarPassosReceita(cod: Long): MutableList<Passo>
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun inserirPassos(passos: MutableList<Passo>)
 
     @Update
     fun atualizarPassos(passos: MutableList<Passo>)
 
     @Delete
     fun deletarPasso(passo: Passo)
+
 }

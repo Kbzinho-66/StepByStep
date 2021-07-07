@@ -3,16 +3,19 @@ package com.example.stepbystep.ui.receitas
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.stepbystep.R
-import com.example.stepbystep.adapters.AdapterIngrediente
 import com.example.stepbystep.data.dao.AppDatabase
 import com.example.stepbystep.data.dao.IngredienteDAO
 import com.example.stepbystep.data.entities.Ingrediente
 import com.example.stepbystep.databinding.ReceitasFragmentRvIngredientesBinding
-import com.google.android.material.snackbar.Snackbar
-import kotlin.properties.Delegates
+
+/**
+ * Fragmento responsável por gerir a RecyclerView de [Ingrediente] associada
+ * a cada receita.
+ */
 
 class IngredientesFragmento : Fragment() {
 
@@ -20,7 +23,7 @@ class IngredientesFragmento : Fragment() {
     private val binding get() = _binding!!
 
     private val args: IngredientesFragmentoArgs by navArgs()
-    private var codigoReceita: Long by Delegates.notNull()
+    private var codigoReceita: Long = 0L
 
     private val db: IngredienteDAO by lazy {
         AppDatabase.getInstance(requireContext()).ingredienteDAO()
@@ -29,11 +32,15 @@ class IngredientesFragmento : Fragment() {
         db.buscarIngredientesReceita(codigoReceita)
     }
 
+    private val adapterIngrediente: AdapterIngrediente by lazy {
+        AdapterIngrediente(listaIngredientes, requireContext())
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         _binding = ReceitasFragmentRvIngredientesBinding.inflate(inflater, container, false)
         setHasOptionsMenu(true)
@@ -42,18 +49,23 @@ class IngredientesFragmento : Fragment() {
 
         inicializarRecyclerView()
 
-        return super.onCreateView(inflater, container, savedInstanceState)
+        binding.botaoNovoIngrediente.setOnClickListener {
+            listaIngredientes.add(Ingrediente(idReceita = codigoReceita))
+            adapterIngrediente.notifyItemInserted(listaIngredientes.size - 1)
+        }
+
+        return binding.root
     }
 
     private fun inicializarRecyclerView() {
 
-        val layoutManager = LinearLayoutManager(activity).also {
-            it.orientation = LinearLayoutManager.VERTICAL
-        }
-
         binding.rvListaIngredientes.apply {
+
+            val layoutManager = LinearLayoutManager(requireContext()).also {
+                it.orientation = LinearLayoutManager.VERTICAL
+            }
             setLayoutManager(layoutManager)
-            val adapterIngrediente = AdapterIngrediente(listaIngredientes, context)
+
             adapter = adapterIngrediente.also {
                 it.notifyDataSetChanged()
             }
@@ -66,7 +78,6 @@ class IngredientesFragmento : Fragment() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu, menuInflater: MenuInflater) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.menu_listas, menu)
     }
 
@@ -79,8 +90,8 @@ class IngredientesFragmento : Fragment() {
     }
 
     private fun salvarIngredientes() {
-        Snackbar.make(binding.root, "Ingredientes salvos", Snackbar.LENGTH_LONG).show()
-        // TODO (Salvar todos os ingredientes)
+        db.inserirIngredientes(listaIngredientes)
+        findNavController().navigateUp()
     }
 
 }
