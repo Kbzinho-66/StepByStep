@@ -34,4 +34,9 @@ data class Passo(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
     var idPasso: Long = 0
+
+    override fun equals(other: Any?): Boolean =
+        (other is Passo)
+                && idReceita == other.idReceita
+                && idPasso == idPasso
 }

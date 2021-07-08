@@ -35,5 +35,10 @@ data class Ingrediente(
 
     // Um booleano para marcar se o usuário tem o ingrediente ou não
     @ColumnInfo(name = "possui") var ok: Boolean = false
+
+    override fun equals(other: Any?): Boolean =
+        (other is Ingrediente)
+                && idReceita == other.idReceita
+                && idIngrediente == idIngrediente
 }
 

@@ -1,4 +1,4 @@
-package com.example.stepbystep.ui.galeria
+package com.example.stepbystep.ui.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.stepbystep.data.entities.Receita
 import com.example.stepbystep.databinding.GaleriaItemBinding
+import com.example.stepbystep.ui.galeria.GaleriaFragmentoDirections
 
 /**
  * Classe que adapta uma [Receita] para
@@ -40,13 +41,12 @@ class AdapterGaleria(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int):
-        GaleriaHolder = GaleriaHolder(
+            GaleriaHolder = GaleriaHolder(
             GaleriaItemBinding.inflate(LayoutInflater.from(parent.context), parent,false)
         )
 
-    override fun onBindViewHolder(holder: GaleriaHolder, position: Int) {
-        val foto = receitas[position]
-        holder.setFoto(foto)
+    override fun onBindViewHolder(holder: GaleriaHolder, posicao: Int) {
+        holder.setFoto(receitas[posicao])
     }
 
     override fun getItemCount(): Int = receitas.size

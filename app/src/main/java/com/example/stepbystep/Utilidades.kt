@@ -5,17 +5,30 @@ import android.net.Uri
 import android.os.Environment
 import androidx.core.content.FileProvider
 import java.io.File
+import java.time.Duration
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
+import java.util.*
 import java.util.concurrent.TimeUnit
+import kotlin.concurrent.schedule
 
 /**
- * Objeto com funções aleatórias que são ou podem ser úteis.
+ * Objeto com funções aleatórias que são ou podem ser úteis eventualmente.
  */
 
 class Utilidades {
 
     companion object {
+
+        fun stringToDuration(string: String): Duration {
+            val t = string.split(':')
+            val horas = t[0]
+            val minutos = t[1]
+            val segundos = t[2]
+
+            val output: Duration = Duration.ZERO
+            return Duration.ZERO
+        }
 
         fun stringToMillis(string: String): Long {
             //TODO (Implementar isso, ou refatorar pra Duration)

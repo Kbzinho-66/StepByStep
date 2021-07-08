@@ -9,6 +9,7 @@ import com.example.stepbystep.data.dao.AppDatabase
 import com.example.stepbystep.data.dao.ReceitaDAO
 import com.example.stepbystep.data.entities.Receita
 import com.example.stepbystep.databinding.GaleriaFragmentBinding
+import com.example.stepbystep.ui.adapters.AdapterGaleria
 
 /**
  * Fragmento responsável por gerir o Livro de Receitas, a grade com a

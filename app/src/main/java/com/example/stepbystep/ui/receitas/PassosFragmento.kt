@@ -11,6 +11,7 @@ import com.example.stepbystep.data.dao.AppDatabase
 import com.example.stepbystep.data.dao.PassoDAO
 import com.example.stepbystep.data.entities.Passo
 import com.example.stepbystep.databinding.ReceitasFragmentRvPassosBinding
+import com.example.stepbystep.ui.adapters.AdapterPasso
 
 /**
  * Fragmento responsável por gerir a RecyclerView de [Passo] associada
@@ -84,6 +85,11 @@ class PassosFragmento : Fragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
+        R.id.action_refresh -> {
+            resetarLista()
+            true
+        }
+
         R.id.action_save -> {
             salvarPassos()
             true
@@ -94,5 +100,12 @@ class PassosFragmento : Fragment() {
     private fun salvarPassos() {
         db.inserirPassos(listaPassos)
         findNavController().navigateUp()
+    }
+
+    private fun resetarLista() {
+        listaPassos.forEach {
+            it.pronto = false
+        }
+        adapterPasso.notifyDataSetChanged()
     }
 }

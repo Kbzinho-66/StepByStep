@@ -2,6 +2,7 @@ package com.example.stepbystep.data.entities
 
 import androidx.room.*
 import kotlinx.serialization.Serializable
+import java.time.Duration
 
 /**
  * Classe de modelo que contém as características básicas de uma receita.

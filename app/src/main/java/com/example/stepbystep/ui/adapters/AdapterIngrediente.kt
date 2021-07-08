@@ -1,4 +1,4 @@
-package com.example.stepbystep.ui.receitas
+package com.example.stepbystep.ui.adapters
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -29,11 +29,15 @@ class AdapterIngrediente(
         RecyclerView.ViewHolder(layoutBinding.root) {
 
         fun setIngrediente(ingrediente: Ingrediente) {
-            with(layoutBinding) {
-                this.itemIngrediente = ingrediente
+
+
+            layoutBinding.apply {
+                itemIngrediente = ingrediente
 
                 ingredienteBotaoDeletar.setOnClickListener {
-                    db.deletarIngrediente(ingrediente) //FIXME(Não funciona por algum motivo)
+                    ingredientes.remove(ingrediente)
+                    db.deletarIngrediente(ingrediente)
+                    notifyItemRemoved(adapterPosition)
                 }
             }
         }
@@ -44,8 +48,8 @@ class AdapterIngrediente(
             parent,false)
         )
 
-    override fun onBindViewHolder(holder: IngredienteHolder, position: Int) {
-        holder.setIngrediente(ingredientes[position])
+    override fun onBindViewHolder(holder: IngredienteHolder, posicao: Int) {
+        holder.setIngrediente(ingredientes[posicao])
     }
 
     override fun getItemCount(): Int = ingredientes.size

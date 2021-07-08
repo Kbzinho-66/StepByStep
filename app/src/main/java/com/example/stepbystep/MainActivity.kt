@@ -13,9 +13,6 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.stepbystep.data.dao.AppDatabase
-import com.example.stepbystep.data.entities.Ingrediente
-import com.example.stepbystep.data.entities.Passo
-import com.example.stepbystep.data.entities.Receita
 import com.example.stepbystep.databinding.MainActivityBinding
 import com.google.android.material.snackbar.Snackbar
 
@@ -55,8 +52,6 @@ class MainActivity : AppCompatActivity() {
 
         // Inicializar o Singleton com o contexto da aplicação
         AppDatabase.getInstance(applicationContext).receitaDAO()
-
-//        popularDB()
 
         if (!pediuPermissao) {
             pedirPermissao.launch(Manifest.permission.CAMERA)
@@ -103,57 +98,5 @@ class MainActivity : AppCompatActivity() {
             .show()
 
     }
-
-    private fun popularDB() {
-
-        with (AppDatabase.getInstance(applicationContext)) {
-
-            clearAllTables()
-            val receitas: MutableList<Receita> = mutableListOf(
-                Receita(
-                    nome = "Penne à Carbonara",
-                    uriFoto = "",
-                    porcoes = 1
-                )
-                ,
-                Receita(
-                    nome = "Lasanha Rústica",
-                    uriFoto = "shorturl.at/beuM9",
-                    porcoes = 5
-                ),
-                Receita(
-                    nome = "Lasanha à Bolonhesa",
-                    uriFoto = "shorturl.at/efBEU",
-                    porcoes = 5
-                )
-        )
-
-            receitaDAO().inserirReceitas(receitas)
-
-//            val receitas = receitaDAO().buscarTodasReceitas()
-            val codReceita = receitas[0].codigo
-            val ingredientes: MutableList<Ingrediente> = mutableListOf(
-                Ingrediente(idReceita = codReceita, nome = "Massa Penne", quantidade = "150 gramas"),
-                Ingrediente(idReceita = codReceita, nome = "Bacon defumado em cubos", quantidade = "8 gramas"),
-                Ingrediente(idReceita = codReceita, nome = "Queijo Parmesão ralado", quantidade = "40 gramas"),
-                Ingrediente(idReceita = codReceita, nome = "Ovo", quantidade = "1"),
-                Ingrediente(idReceita = codReceita, nome = "Gema de Ovo", quantidade = "2"),
-                Ingrediente(idReceita = codReceita, nome = "Sal", quantidade = "A gosto"),
-                Ingrediente(idReceita = codReceita, nome = "Água", quantidade = "O suficiente para o cozimento da água"),
-                Ingrediente(idReceita = codReceita, nome = "Pimenta-do-reino moída", quantidade = "A gosto")
-            )
-
-            val passos: MutableList<Passo> = mutableListOf(
-                Passo(codReceita, descricao = "Cozinhar a massa.",
-                    ordem = 0),
-                Passo(codReceita, descricao = "Misturar o ovo, as gemas a primenta-do-reino e o parmesão" +
-                        " até que vire um creme grosso.", ordem = 1)
-            )
-            ingredienteDAO().inserirIngredientes(ingredientes)
-            passoDAO().inserirPassos(passos)
-        }
-    }
-
-
 
 }

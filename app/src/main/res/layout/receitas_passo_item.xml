@@ -12,7 +12,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="1dp"
         android:background="@color/desert_sand">
 
@@ -30,7 +30,8 @@
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/passo_descricao_layout"
             android:layout_width="350dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="100dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -40,14 +41,15 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/passo_descricao"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="100dp"
                 android:backgroundTint="@color/desert_sand"
                 android:fontFamily="casual"
                 android:hint="@string/step_description"
                 android:text="@={passoItem.descricao}"
                 android:inputType="textMultiLine|textNoSuggestions"
                 android:textColor="@color/smoky_black"
-                android:textSize="20sp" />
+                android:textSize="19sp" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <ImageButton

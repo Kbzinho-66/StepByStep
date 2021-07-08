@@ -11,6 +11,7 @@ import com.example.stepbystep.data.dao.AppDatabase
 import com.example.stepbystep.data.dao.IngredienteDAO
 import com.example.stepbystep.data.entities.Ingrediente
 import com.example.stepbystep.databinding.ReceitasFragmentRvIngredientesBinding
+import com.example.stepbystep.ui.adapters.AdapterIngrediente
 
 /**
  * Fragmento responsável por gerir a RecyclerView de [Ingrediente] associada
@@ -82,6 +83,11 @@ class IngredientesFragmento : Fragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
+        R.id.action_refresh -> {
+            resetarLista()
+            true
+        }
+
         R.id.action_save -> {
             salvarIngredientes()
             true
@@ -92,6 +98,13 @@ class IngredientesFragmento : Fragment() {
     private fun salvarIngredientes() {
         db.inserirIngredientes(listaIngredientes)
         findNavController().navigateUp()
+    }
+
+    private fun resetarLista() {
+        listaIngredientes.forEach {
+            it.ok = false
+        }
+        adapterIngrediente.notifyDataSetChanged()
     }
 
 }

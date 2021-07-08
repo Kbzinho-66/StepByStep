@@ -1,15 +1,13 @@
-package com.example.stepbystep.ui.receitas
+package com.example.stepbystep.ui.adapters
 
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
-import com.example.stepbystep.R
 import com.example.stepbystep.data.dao.AppDatabase
 import com.example.stepbystep.data.dao.PassoDAO
 import com.example.stepbystep.data.entities.Passo
-import com.example.stepbystep.databinding.ReceitasPassoCronometradoBinding as CronometradoBinding
 import com.example.stepbystep.databinding.ReceitasPassoItemBinding as NormalBinding
 
 /**
@@ -31,6 +29,30 @@ class AdapterPasso(
 
     inner class PassoHolder(private val layoutBinding: ViewBinding) :
         RecyclerView.ViewHolder(layoutBinding.root) {
+
+        fun setPasso(passo: Passo) {
+
+            if (passo.cronometrado) {
+
+//                    (layoutBinding as CronometradoBinding).apply{
+//                        passoItem = passo
+//                        passos.removeAt(posicao)
+//                        db.deletarPasso(passo)
+//                        notifyItemRemoved(adapterPosition)
+//                    }
+
+            } else {
+
+                (layoutBinding as NormalBinding).apply{
+                    passoItem = passo
+                    passoBotaoDeletar.setOnClickListener {
+                        passos.remove(passo)
+                        db.deletarPasso(passo)
+                        notifyItemRemoved(adapterPosition)
+                    }
+                }
+            }
+        }
 
 //        fun setPasso(passo: Passo) {
 //
@@ -59,15 +81,7 @@ class AdapterPasso(
 //            }
 //        }
 
-            fun setPasso(passo: Passo) {
-                if (passo.cronometrado) {
-//                    (layoutBinding as CronometradoBinding).passoItem = passo
-                } else {
-                    (layoutBinding as NormalBinding).passoItem = passo
-                }
 
-                //TODO (Colocar os onClickListeners nos botões)
-            }
     }
 
     //TODO (Descobrir como fazer isso aqui direito, no momento dá erro no Layout)
@@ -91,11 +105,17 @@ class AdapterPasso(
 //        return PassoHolder(layoutBinding)
 //    }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PassoHolder =
-         PassoHolder(NormalBinding.inflate(LayoutInflater.from(parent.context),parent, false))
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PassoHolder {
+        //TODO (Fazer retornar os dois tipos de Passos)
+        return PassoHolder(
+            NormalBinding
+                .inflate(LayoutInflater.from(parent.context),parent, false)
+        )
+    }
 
-    override fun onBindViewHolder(holder: PassoHolder, position: Int) {
-        holder.setPasso(passos[position])
+
+    override fun onBindViewHolder(holder: PassoHolder, posicao: Int) {
+        holder.setPasso(passos[posicao])
     }
 
     override fun getItemCount(): Int = passos.size

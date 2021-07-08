@@ -43,8 +43,9 @@ class DetalhesReceita : Fragment() {
                 binding.fotoRC.apply {
                     foreground = null
 //                    rotation = 90F
-                    //FIXME (Quando a foto é tirada na hora, ela sempre fica virada)
-                    // Ou não... Se a foto for tirada com o celular "deitado" ela fica melhor
+                    // OBS: Quando a foto é tirada na hora, ela fica virada, pois
+                    // foi tirada com o celular "deitado". Acho que fica melhor
+                    // assim.
                 }
             }
         }
@@ -85,13 +86,15 @@ class DetalhesReceita : Fragment() {
 
         var codigoReceita = args.codigoReceita
 
-        // O valor default do codigoReceita é -1L, logo é criação de receita
-        receita = if (codigoReceita == -1L) {
-            Receita().also {
-                codigoReceita = it.codigo
-            }
+        // O valor default do codigoReceita é -1L, então, se for 1, criar uma receita
+        if (codigoReceita == -1L) {
+            //FIXME (Não dá pra chamar os fragmentos de ingredientes e passos
+            // depois de criar uma receita.
+            receita = Receita()
+            codigoReceita = receita.codigo
+//            db.inserirReceita(receita)
         } else {
-            db.buscarReceitaPorCodigo(codigoReceita)
+            receita = db.buscarReceitaPorCodigo(codigoReceita)
         }
 
         with(binding) {
@@ -127,8 +130,10 @@ class DetalhesReceita : Fragment() {
 
                 (entradaTempoPreparo as TextView).text =
                     Utilidades.millisToString(receita.tempoPreparoMilis)
+
                 (entradaTempoCozimento as TextView).text =
                     Utilidades.millisToString(receita.tempoCozimentoMilis)
+
                 (entradaPorcoes as TextView).text = receita.porcoes.toString()
             }
         }
@@ -169,20 +174,40 @@ class DetalhesReceita : Fragment() {
     private fun salvarReceita() {
         with (binding) {
             receita.nome = entradaNome.text.toString()
-            receita.uriFoto = uriFoto.toString()
+
+            receita.uriFoto =
+                if (uriFoto != null)
+                    uriFoto.toString()
+                else
+                    receita.uriFoto
 
             receita.tempoPreparoMilis =
-                if (entradaTempoPreparo.text?.isNotEmpty() == true)
-                    Utilidades.stringToMillis(entradaTempoPreparo.toString())
-                else 0L
+                with (entradaTempoCozimento.text.toString()){
+                    if (this.isNotEmpty())
+                        Utilidades.stringToMillis(this)
+                    else
+                        0L
+                }
 
             receita.tempoCozimentoMilis =
-                if (entradaTempoCozimento.text?.isNotEmpty() == true)
-                    Utilidades.stringToMillis(entradaTempoCozimento.toString())
-                else 0L
+                with (entradaTempoCozimento.text.toString()){
+                    if (this.isNotEmpty())
+                        Utilidades.stringToMillis(this)
+                    else
+                        0L
+                }
+
+            receita.porcoes =
+                with (entradaPorcoes.text.toString()) {
+                    if (this.isNotEmpty())
+                        this.toInt()
+                    else
+                        0
+                }
         }
         db.inserirReceita(receita)
         Snackbar.make(binding.root,"Receita Salva!", Snackbar.LENGTH_LONG).show()
+        findNavController().navigate(R.id.action_nav_detalhes_receita_to_nav_home)
     }
 
     private fun deletarReceita() {
