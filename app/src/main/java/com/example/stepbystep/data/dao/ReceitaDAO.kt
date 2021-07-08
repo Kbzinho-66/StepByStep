@@ -30,6 +30,4 @@ interface ReceitaDAO {
     @Delete
     fun deletarReceita(receita: Receita)
 
-    @Update
-    fun atualizarPassos(passos: MutableList<Passo>)
 }

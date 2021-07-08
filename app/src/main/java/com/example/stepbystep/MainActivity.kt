@@ -67,18 +67,28 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         // Inicializar o Singleton com o contexto da aplicação e aproveitar pra prepopular
-        if (db.receitaDAO().buscarTodasReceitas().isEmpty()) {
-            try {
+        try {
+            if (db.receitaDAO().buscarTodasReceitas().isEmpty()) {
                 criarReceitas()
-                criarIngredientes()
-                criarPassos()
-            } catch (erro: SQLiteConstraintException) {
-                Log.e(erro.toString(), "Erro ao prepopular o banco de dados")
-            } finally {
-                Snackbar.make(binding.root, "Receitas inseridas(sem foto)", Snackbar.LENGTH_SHORT).show()
             }
 
+            if (db.ingredienteDAO()
+                    .buscarIngredientesReceita(db.receitaDAO().buscarReceitaPorNome("Cookies"))
+                    .isEmpty()) {
+                criarIngredientes()
+            }
+
+            if (db.passoDAO()
+                    .buscarPassosReceita(db.receitaDAO().buscarReceitaPorNome("Cookies"))
+                    .isEmpty()) {
+                criarPassos()
+            }
+        } catch (erro: SQLiteConstraintException) {
+            Log.e(erro.toString(), "Erro ao prepopular o banco de dados")
+        } finally {
+            Snackbar.make(binding.root, "Receitas inseridas(sem foto)", Snackbar.LENGTH_SHORT).show()
         }
+
 
         // Declarar onde os fragmentos vão ser carregados
         val navHostFragment = supportFragmentManager

@@ -98,7 +98,8 @@
             android:id="@+id/entrada_nome"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center" />
+            android:gravity="center"
+            android:inputType="textNoSuggestions"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
