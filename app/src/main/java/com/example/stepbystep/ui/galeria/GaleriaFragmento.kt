@@ -13,7 +13,7 @@ import com.example.stepbystep.ui.adapters.AdapterGaleria
 
 /**
  * Fragmento responsável por gerir o Livro de Receitas, a grade com a
- * foto de cada [Receita]
+ * foto de cada [Receita] no banco de dados
  */
 
 class GaleriaFragmento : Fragment() {
@@ -41,6 +41,7 @@ class GaleriaFragmento : Fragment() {
 
     private fun inicializarRecyclerView() {
 
+        // TODO (Testar a StaggeredGridLayout)
         binding.rvGaleriaReceitas.adapter = adapterGaleria.also{
                 it.notifyDataSetChanged()
         }

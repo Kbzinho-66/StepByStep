@@ -1,6 +1,8 @@
 package com.example.stepbystep.ui.adapters
 
 import android.content.Context
+import android.database.sqlite.SQLiteConstraintException
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -39,6 +41,7 @@ class AdapterPasso(
 //                        passos.removeAt(posicao)
 //                        db.deletarPasso(passo)
 //                        notifyItemRemoved(adapterPosition)
+//                        TODO(Implementar o Timer)
 //                    }
 
             } else {
@@ -47,41 +50,16 @@ class AdapterPasso(
                     passoItem = passo
                     passoBotaoDeletar.setOnClickListener {
                         passos.remove(passo)
-                        db.deletarPasso(passo)
+
+                        try { db.deletarPasso(passo) } catch (erro: SQLiteConstraintException) {
+                            Log.e(erro.toString(), "Erro ao deletar um passo")
+                        }
+
                         notifyItemRemoved(adapterPosition)
                     }
                 }
             }
         }
-
-//        fun setPasso(passo: Passo) {
-//
-//            if  (passo.cronometrado) {
-//
-//                with(layoutBinding as NormalBinding) {
-//                    passoCheckbox.isChecked = passo.pronto
-//                    (passoDescricao as TextView).text = passo.descricao
-//                    passoBotaoDeletar.setOnClickListener {
-//                        db.deletarPasso(passo)
-//                    }
-//                }
-//
-//            } else {
-//
-//                with(layoutBinding as CronometradoBinding) {
-//                    (passoDescricao as TextView).text = passo.descricao
-//                    passoBotaoDeletar.setOnClickListener {
-//                        db.deletarPasso(passo)
-//                    }
-//                    passoProgresso.max = (passo.duracao / 1000).toInt()
-//                    passoIniciarTimer.setOnClickListener {
-//                        TODO("Implementar o timer")
-//                    }
-//                }
-//            }
-//        }
-
-
     }
 
     //TODO (Descobrir como fazer isso aqui direito, no momento dá erro no Layout)

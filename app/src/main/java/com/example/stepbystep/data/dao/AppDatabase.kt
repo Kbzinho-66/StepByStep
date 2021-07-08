@@ -18,7 +18,7 @@ import com.example.stepbystep.data.entities.Receita
 
 @Database(
     entities = [Receita::class, Ingrediente::class, Passo::class],
-    version = 4,
+    version = 5,
     exportSchema = true
 )
 abstract class AppDatabase : RoomDatabase() {
@@ -33,7 +33,7 @@ abstract class AppDatabase : RoomDatabase() {
         Room.databaseBuilder(
             it.applicationContext, AppDatabase::class.java, "receitas.db"
         ).run {
-            fallbackToDestructiveMigration()
+            fallbackToDestructiveMigration() // TODO (Num futuro distante, descobrir como fazer a migração
             allowMainThreadQueries() // TODO (Refatorar pra usar coroutines/Flow)
             build()
         }

@@ -1,6 +1,8 @@
 package com.example.stepbystep.ui.adapters
 
 import android.content.Context
+import android.database.sqlite.SQLiteConstraintException
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -36,7 +38,9 @@ class AdapterIngrediente(
 
                 ingredienteBotaoDeletar.setOnClickListener {
                     ingredientes.remove(ingrediente)
-                    db.deletarIngrediente(ingrediente)
+                    try { db.deletarIngrediente(ingrediente) } catch (erro: SQLiteConstraintException) {
+                        Log.e(erro.toString(), "Erro ao deletar um ingrediente")
+                    }
                     notifyItemRemoved(adapterPosition)
                 }
             }

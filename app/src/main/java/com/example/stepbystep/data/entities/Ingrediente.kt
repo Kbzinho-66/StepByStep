@@ -1,6 +1,7 @@
 package com.example.stepbystep.data.entities
 
 import androidx.room.*
+import androidx.room.ForeignKey.CASCADE
 
 /**
  * Classe de modelo dos ingredientes.
@@ -9,13 +10,12 @@ import androidx.room.*
 
 @Entity(
     tableName = "ingredientes",
-    foreignKeys = [
-        ForeignKey(
-            entity = Receita::class,
-            parentColumns = ["id"],
-            childColumns = ["id_receita"]
-        )
-    ],
+    foreignKeys = [ForeignKey(
+        entity = Receita::class,
+        parentColumns = ["id"],
+        childColumns = ["id_receita"],
+        onDelete = CASCADE
+        )],
     indices = [Index("id_receita")]
 )
 data class Ingrediente(
@@ -40,5 +40,13 @@ data class Ingrediente(
         (other is Ingrediente)
                 && idReceita == other.idReceita
                 && idIngrediente == idIngrediente
+
+    override fun hashCode(): Int {
+        var result = idReceita.hashCode()
+        result = 31 * result + nome.hashCode()
+        result = 31 * result + quantidade.hashCode()
+        result = 31 * result + idIngrediente.hashCode()
+        return result
+    }
 }
 

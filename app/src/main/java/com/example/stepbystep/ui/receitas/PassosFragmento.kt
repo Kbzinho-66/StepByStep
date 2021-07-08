@@ -1,6 +1,8 @@
 package com.example.stepbystep.ui.receitas
 
+import android.database.sqlite.SQLiteConstraintException
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -12,6 +14,7 @@ import com.example.stepbystep.data.dao.PassoDAO
 import com.example.stepbystep.data.entities.Passo
 import com.example.stepbystep.databinding.ReceitasFragmentRvPassosBinding
 import com.example.stepbystep.ui.adapters.AdapterPasso
+import com.google.android.material.snackbar.Snackbar
 
 /**
  * Fragmento responsável por gerir a RecyclerView de [Passo] associada
@@ -98,7 +101,13 @@ class PassosFragmento : Fragment() {
     }
 
     private fun salvarPassos() {
-        db.inserirPassos(listaPassos)
+        try {
+            db.inserirPassos(listaPassos)
+        } catch (erro: SQLiteConstraintException) {
+            Snackbar.make(binding.root, "Por favor, salve a receita antes de adicionar ingredientes ou passos", Snackbar.LENGTH_LONG).show()
+            Log.e(erro.toString(), "Erro ao salvar a lista de passos")
+        }
+
         findNavController().navigateUp()
     }
 

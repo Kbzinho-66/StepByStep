@@ -20,15 +20,6 @@ class Utilidades {
 
     companion object {
 
-        fun stringToDuration(string: String): Duration {
-            val t = string.split(':')
-            val horas = t[0]
-            val minutos = t[1]
-            val segundos = t[2]
-
-            val output: Duration = Duration.ZERO
-            return Duration.ZERO
-        }
 
         fun stringToMillis(string: String): Long {
             //TODO (Implementar isso, ou refatorar pra Duration)

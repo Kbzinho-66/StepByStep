@@ -16,7 +16,7 @@ import java.time.Duration
 
 data class Receita(
     var nome: String = "",
-    var uriFoto: String = "",
+    var uriFoto: String = "", // Caminho pra foto no celular
 
     // TODO (Mudar isso pra um formato mais utilizável)
     var tempoPreparoMilis: Long = 0,

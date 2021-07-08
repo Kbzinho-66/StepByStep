@@ -1,6 +1,7 @@
 package com.example.stepbystep.data.entities
 
 import androidx.room.*
+import androidx.room.ForeignKey.CASCADE
 
 /**
  * Classe de modelo para um passo no modo de fazer de uma receita.
@@ -12,9 +13,12 @@ import androidx.room.*
 
 @Entity(
     tableName = "passos",
-    foreignKeys = [
-        ForeignKey(entity = Receita::class, parentColumns = ["id"], childColumns = ["id_receita"])
-    ],
+    foreignKeys = [ForeignKey(
+        entity = Receita::class,
+        parentColumns = ["id"],
+        childColumns = ["id_receita"],
+        onDelete = CASCADE
+    )],
     indices = [Index("id_receita")]
 )
 data class Passo(
@@ -39,4 +43,15 @@ data class Passo(
         (other is Passo)
                 && idReceita == other.idReceita
                 && idPasso == idPasso
+
+    override fun hashCode(): Int {
+        var result = idReceita.hashCode()
+        result = 31 * result + descricao.hashCode()
+        result = 31 * result + pronto.hashCode()
+        result = 31 * result + ordem
+        result = 31 * result + duracao.hashCode()
+        result = 31 * result + cronometrado.hashCode()
+        result = 31 * result + idPasso.hashCode()
+        return result
+    }
 }

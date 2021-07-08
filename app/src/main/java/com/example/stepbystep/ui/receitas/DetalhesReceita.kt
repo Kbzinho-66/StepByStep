@@ -1,7 +1,9 @@
 package com.example.stepbystep.ui.receitas
 
+import android.database.sqlite.SQLiteConstraintException
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import android.widget.PopupMenu
 import android.widget.TextView
@@ -43,9 +45,9 @@ class DetalhesReceita : Fragment() {
                 binding.fotoRC.apply {
                     foreground = null
 //                    rotation = 90F
-                    // OBS: Quando a foto é tirada na hora, ela fica virada, pois
-                    // foi tirada com o celular "deitado". Acho que fica melhor
-                    // assim.
+                    // OBS: Quando a foto é tirada na hora, ela fica virada, porque
+                    // foi tirada com o celular "deitado". A exibição fica meio estranha,
+                    // mas acho que é mais comum tirar foto assim do que retrato.
                 }
             }
         }
@@ -88,8 +90,11 @@ class DetalhesReceita : Fragment() {
 
         // O valor default do codigoReceita é -1L, então, se for 1, criar uma receita
         if (codigoReceita == -1L) {
-            //FIXME (Não dá pra chamar os fragmentos de ingredientes e passos
-            // depois de criar uma receita.
+            /**
+             * FIXME (Não dá pra chamar os fragments de ingredientes e passos direto
+             *  depois de criar a receita aqui. Mesmo inserindo no banco de dados, a
+             *  chave estrangeira ainda não é reconhecida.
+             */
             receita = Receita()
             codigoReceita = receita.codigo
 //            db.inserirReceita(receita)
@@ -160,6 +165,7 @@ class DetalhesReceita : Fragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
+
         R.id.action_save -> {
             salvarReceita()
             true
@@ -205,13 +211,21 @@ class DetalhesReceita : Fragment() {
                         0
                 }
         }
-        db.inserirReceita(receita)
+
+        try { db.inserirReceita(receita) } catch (erro: SQLiteConstraintException) {
+            Log.e(context.toString(), "Erro ao salvar uma receita")
+        }
+
         Snackbar.make(binding.root,"Receita Salva!", Snackbar.LENGTH_LONG).show()
         findNavController().navigate(R.id.action_nav_detalhes_receita_to_nav_home)
     }
 
     private fun deletarReceita() {
-        db.deletarReceita(receita)
+
+        try { db.deletarReceita(receita) } catch (erro: SQLiteConstraintException) {
+            Log.e(erro.toString(), "Exceção ao deletar uma receita.")
+        }
+
         Snackbar.make(binding.root,"Receita Deletada!", Snackbar.LENGTH_LONG).show()
         findNavController().navigate(R.id.action_nav_detalhes_receita_to_nav_home)
     }
@@ -221,6 +235,7 @@ class DetalhesReceita : Fragment() {
         PopupMenu(context, view).apply {
             setOnMenuItemClickListener { item ->
                 when (item.itemId) {
+
                     R.id.action_tirar_foto -> {
                         Utilidades.criaArquivo(requireContext())?.let {
                             uriFoto = it
@@ -228,10 +243,12 @@ class DetalhesReceita : Fragment() {
                         }
                         true
                     }
+
                     R.id.action_pegar_galeria -> {
                         escolherFotoPrato.launch("image/*")
                         true
                     }
+
                     else -> false
                 }
             }

@@ -18,6 +18,9 @@ interface ReceitaDAO {
     @Query("SELECT * FROM receitas WHERE id = :cod LIMIT 1")
     fun buscarReceitaPorCodigo(cod: Long): Receita
 
+    @Query("SELECT id FROM receitas WHERE nome = :nome LIMIT 1")
+    fun buscarReceitaPorNome(nome: String): Long
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun inserirReceita(receita: Receita): Long
 
